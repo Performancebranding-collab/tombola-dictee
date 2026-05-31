@@ -8,971 +8,654 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:#0b1120;color:#e2e8f0;min-height:100vh}
-
-/* HEADER */
 .header{background:linear-gradient(135deg,#0f2557 0%,#1a3a8f 50%,#0f2557 100%);padding:18px 40px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #1e3a8a}
 .header-icon{font-size:2rem}
-.header h1{font-size:1.4rem;font-weight:800;letter-spacing:-0.5px}
-.header-sub{color:#93c5fd;font-size:0.85rem;margin-top:2px}
-.pill{background:#f59e0b;color:#000;padding:4px 14px;border-radius:20px;font-size:0.7rem;font-weight:800;letter-spacing:1px;margin-left:auto}
-
-/* TABS */
+.header h1{font-size:1.4rem;font-weight:800}
+.header-sub{color:#93c5fd;font-size:.85rem;margin-top:2px}
+.pill{background:#f59e0b;color:#000;padding:4px 14px;border-radius:20px;font-size:.7rem;font-weight:800;letter-spacing:1px;margin-left:auto}
 .tabs{background:#0f172a;padding:0 40px;display:flex;gap:2px;border-bottom:2px solid #1e293b}
-.tab{padding:14px 24px;cursor:pointer;font-size:0.875rem;color:#64748b;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;display:flex;align-items:center;gap:8px}
+.tab{padding:14px 24px;cursor:pointer;font-size:.875rem;color:#64748b;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;display:flex;align-items:center;gap:8px}
 .tab:hover:not(.active){color:#94a3b8}
 .tab.active{color:#60a5fa;border-bottom-color:#3b82f6;font-weight:600}
-.tab-badge{background:#1e293b;border-radius:10px;padding:2px 8px;font-size:0.7rem;font-weight:700}
+.tab-badge{background:#1e293b;border-radius:10px;padding:2px 8px;font-size:.7rem;font-weight:700}
 .tab.active .tab-badge{background:#1e40af;color:#93c5fd}
-
-/* LAYOUT */
 .content{padding:32px 40px;max-width:1280px}
 .section{display:none}.section.active{display:block}
-
-/* CARD */
 .card{background:#111827;border:1px solid #1e293b;border-radius:14px;padding:24px;margin-bottom:20px}
-.card-title{font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#475569;margin-bottom:20px;display:flex;align-items:center;gap:8px}
-
-/* FORM */
-.form-grid{display:grid;gap:14px}
-.form-grid-2{grid-template-columns:1fr 1fr}
-.form-grid-3{grid-template-columns:2fr 1fr auto}
-.form-group{display:flex;flex-direction:column;gap:6px}
-.form-group label{font-size:0.78rem;color:#64748b;font-weight:500}
-input[type=text],input[type=number]{background:#0b1120;border:1.5px solid #1e293b;border-radius:9px;padding:10px 14px;color:#e2e8f0;font-size:0.9rem;outline:none;transition:border-color .2s;width:100%}
+.card-title{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#475569;margin-bottom:20px}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.form-group label{font-size:.78rem;color:#64748b;font-weight:500}
+input[type=text],input[type=number]{background:#0b1120;border:1.5px solid #1e293b;border-radius:9px;padding:10px 14px;color:#e2e8f0;font-size:.9rem;outline:none;transition:border-color .2s;width:100%}
 input:focus{border-color:#3b82f6}
 input::placeholder{color:#334155}
-
-/* NIVEAU CHIPS */
-.niveaux-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-.n-chip{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:10px;border:1.5px solid #1e293b;background:#0b1120;cursor:pointer;font-size:0.82rem;color:#64748b;transition:all .2s;user-select:none}
-.n-chip:hover{border-color:#334155;color:#94a3b8}
+.logo-row{display:flex;align-items:center;gap:14px}
+.logo-box{width:64px;height:64px;border-radius:10px;border:1.5px solid #1e293b;background:#0b1120;display:flex;align-items:center;justify-content:center;font-size:1.6rem;overflow:hidden;flex-shrink:0}
+.logo-box img{width:100%;height:100%;object-fit:contain}
+.logo-btn{cursor:pointer;background:#0b1120;border:1.5px dashed #334155;border-radius:9px;padding:9px 16px;font-size:.82rem;color:#64748b;transition:all .2s;display:inline-flex;align-items:center;gap:7px}
+.logo-btn:hover{border-color:#3b82f6;color:#93c5fd}
+.n-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.n-chip{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:10px;border:1.5px solid #1e293b;background:#0b1120;cursor:pointer;font-size:.82rem;color:#64748b;transition:all .2s;user-select:none}
 .n-chip.on{border-color:#3b82f6;background:#1e3a8a20;color:#93c5fd;font-weight:600}
 .n-chip .dot{width:8px;height:8px;border-radius:50%;background:#1e293b;transition:background .2s}
 .n-chip.on .dot{background:#3b82f6}
-
-/* BUTTONS */
-.btn{padding:10px 20px;border-radius:9px;border:none;cursor:pointer;font-size:0.875rem;font-weight:600;transition:all .15s;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
-.btn:active{transform:scale(0.97)}
+.btn{padding:10px 20px;border-radius:9px;border:none;cursor:pointer;font-size:.875rem;font-weight:600;transition:all .15s;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.btn:active{transform:scale(.97)}
 .btn-primary{background:#2563eb;color:#fff}.btn-primary:hover{background:#1d4ed8}
 .btn-ghost{background:#1e293b;color:#94a3b8;border:1px solid #334155}.btn-ghost:hover{background:#273549;color:#e2e8f0}
 .btn-danger{background:#991b1b;color:#fca5a5}.btn-danger:hover{background:#7f1d1d}
 .btn-success{background:#166534;color:#86efac}.btn-success:hover{background:#14532d}
 .btn-gold{background:#d97706;color:#fff}.btn-gold:hover{background:#b45309}
-.btn-sm{padding:6px 12px;font-size:0.78rem}
-
-/* TABLE */
+.btn-sm{padding:6px 12px;font-size:.78rem}
 .table-wrap{overflow-x:auto;border-radius:10px;border:1px solid #1e293b}
 table{width:100%;border-collapse:collapse}
-th{background:#0b1120;padding:11px 16px;text-align:left;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#475569;border-bottom:1px solid #1e293b}
-td{padding:13px 16px;font-size:0.875rem;border-bottom:1px solid #0f172a;vertical-align:middle}
+th{background:#0b1120;padding:11px 16px;text-align:left;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#475569;border-bottom:1px solid #1e293b}
+td{padding:13px 16px;font-size:.875rem;border-bottom:1px solid #0f172a;vertical-align:middle}
 tr:last-child td{border-bottom:none}
 tbody tr:hover td{background:#0f1a2e}
-
-/* BADGES */
-.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:8px;font-size:0.72rem;font-weight:600;white-space:nowrap}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:8px;font-size:.72rem;font-weight:600;white-space:nowrap}
 .b-blue{background:#1e3a8a30;color:#93c5fd;border:1px solid #1e3a8a}
 .b-amber{background:#92400e30;color:#fcd34d;border:1px solid #92400e}
 .b-green{background:#14532d30;color:#86efac;border:1px solid #14532d}
-.b-purple{background:#4c1d9530;color:#c4b5fd;border:1px solid #4c1d95}
 .b-red{background:#7f1d1d30;color:#fca5a5;border:1px solid #7f1d1d}
 .b-gray{background:#1e293b;color:#64748b;border:1px solid #334155}
-
-/* UPLOAD ZONE */
 .drop-zone{border:2px dashed #1e293b;border-radius:14px;padding:48px 24px;text-align:center;cursor:pointer;transition:all .2s}
 .drop-zone:hover,.drop-zone.drag{border-color:#3b82f6;background:#1e3a8a10}
-.drop-zone .dz-icon{font-size:3rem;margin-bottom:12px}
-.drop-zone h3{font-size:1rem;font-weight:600;margin-bottom:6px}
-.drop-zone p{font-size:0.8rem;color:#475569}
-
-/* STATS */
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
 .stat{background:#111827;border:1px solid #1e293b;border-radius:12px;padding:18px 20px}
 .stat-num{font-size:1.8rem;font-weight:800;color:#60a5fa}
-.stat-lbl{font-size:0.75rem;color:#475569;margin-top:4px}
-
-/* TIRAGE HERO */
-.tirage-hero{background:linear-gradient(135deg,#111827,#0f2040);border:1px solid #1e3a8a;border-radius:16px;padding:48px;text-align:center;margin-bottom:24px}
-.tirage-hero .hero-icon{font-size:4rem;margin-bottom:16px}
-.tirage-hero h2{font-size:1.5rem;font-weight:800;margin-bottom:10px}
-.tirage-hero p{color:#64748b;font-size:0.9rem;margin-bottom:28px}
-.info-strip{display:inline-flex;gap:24px;background:#0b1120;border:1px solid #1e293b;border-radius:10px;padding:10px 24px;margin-bottom:28px;font-size:0.875rem}
-.info-strip span{color:#64748b}
-.info-strip strong{color:#60a5fa}
-
-/* LIVE TIRAGE */
-.live-layout{display:grid;grid-template-columns:1fr 380px;gap:20px;align-items:start}
-@media(max-width:900px){.live-layout{grid-template-columns:1fr}}
-
-/* Carte marque active */
-.brand-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
-.brand-card{background:#111827;border:1.5px solid #1e293b;border-radius:14px;padding:18px;transition:all .3s;position:relative;overflow:hidden}
-.brand-card.active-brand{border-color:#f59e0b;box-shadow:0 0 0 3px #f59e0b30}
-.brand-card.exhausted{opacity:.35;pointer-events:none;filter:grayscale(1)}
-.brand-card-name{font-weight:700;font-size:0.95rem;margin-bottom:6px}
-.brand-card-niveaux{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px}
-.brand-card-footer{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.counter-box{display:flex;align-items:center;gap:6px}
-.counter-num{font-size:1.6rem;font-weight:800;color:#f59e0b;line-height:1}
-.counter-sep{color:#334155;font-size:0.85rem}
-.counter-max{font-size:0.85rem;color:#475569}
-.exhausted-stamp{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-15deg);font-size:1.8rem;font-weight:900;color:#ef4444;opacity:.5;pointer-events:none;white-space:nowrap;letter-spacing:2px;border:3px solid #ef4444;border-radius:6px;padding:4px 10px}
-
-/* Popup gagnant */
-.winner-flash{background:linear-gradient(135deg,#0f2040,#1a1a2e);border:2px solid #f59e0b;border-radius:16px;padding:28px;text-align:center;margin-bottom:20px;transition:all .3s}
-.winner-flash.hidden{display:none}
-.wf-brand{font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#f59e0b;margin-bottom:8px}
-.wf-name{font-size:1.6rem;font-weight:900;color:#fff;margin-bottom:6px;word-break:break-word}
-.wf-etab{font-size:0.9rem;color:#64748b}
-.wf-count{font-size:0.78rem;color:#475569;margin-top:10px}
-
-/* Historique */
-.history-list{max-height:480px;overflow-y:auto}
-.hist-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:1px solid #0f172a;font-size:0.82rem}
-.hist-item:last-child{border-bottom:none}
-.hist-item:nth-child(odd){background:#0d1628}
-.hist-num{color:#334155;flex-shrink:0;width:22px;text-align:right}
-.hist-brand{color:#f59e0b;font-weight:600;font-size:0.72rem;white-space:nowrap}
-.hist-name{font-weight:600;flex:1}
-.hist-etab{color:#475569;font-size:0.75rem}
-
-/* DRAW RESULTS (export view) */
-.result-card{background:#111827;border:1px solid #1e293b;border-radius:12px;overflow:hidden;margin-bottom:14px}
-.result-header{padding:14px 20px;background:#0b1120;border-bottom:1px solid #1e293b;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.result-header-left{display:flex;align-items:center;gap:12px}
-.result-brand{font-weight:700;font-size:1rem}
-.result-niveaux{display:flex;gap:6px;flex-wrap:wrap}
-.result-body{padding:0}
-.winner-row{display:flex;align-items:center;justify-content:space-between;padding:11px 20px;border-bottom:1px solid #0b1120}
-.winner-row:last-child{border-bottom:none}
-.winner-row:nth-child(odd){background:#0d1628}
-.winner-num{color:#334155;font-size:0.78rem;width:28px;flex-shrink:0}
-.winner-name{font-weight:600;font-size:0.9rem;flex:1}
-.winner-etab{color:#475569;font-size:0.8rem;text-align:right}
-.no-winners{padding:20px;text-align:center;color:#334155;font-size:0.85rem}
-
-@keyframes popIn{0%{transform:scale(.85);opacity:0}60%{transform:scale(1.04)}100%{transform:scale(1);opacity:1}}
-.pop{animation:popIn .35s ease forwards}
-
-/* WARNING */
-.warn-bar{background:#78350f20;border:1px solid #92400e;border-radius:8px;padding:8px 14px;color:#fcd34d;font-size:0.78rem;display:flex;align-items:center;gap:8px}
-
-/* ACTIONS BAR */
-.actions-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px}
-.actions-bar h2{font-size:1.1rem;font-weight:700}
-
-/* EMPTY */
-.empty{text-align:center;padding:40px 20px;color:#334155}
-.empty .empty-icon{font-size:2.5rem;margin-bottom:10px}
-.empty p{font-size:0.875rem}
-
-/* FORMAT HINT */
-.format-cols{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+.stat-lbl{font-size:.75rem;color:#475569;margin-top:4px}
+.warn-bar{background:#78350f20;border:1px solid #92400e;border-radius:8px;padding:8px 14px;color:#fcd34d;font-size:.78rem;display:flex;align-items:center;gap:8px}
 .format-col{background:#0b1120;border:1px solid #1e293b;border-radius:10px;padding:14px 20px;text-align:center;min-width:120px}
-.format-col .fc-name{font-size:0.78rem;font-weight:700;color:#60a5fa;margin:6px 0 4px}
-.format-col .fc-desc{font-size:0.72rem;color:#475569}
-
-/* HIDDEN */
+.format-col .fc-name{font-size:.78rem;font-weight:700;color:#60a5fa;margin:6px 0 4px}
+.format-col .fc-desc{font-size:.72rem;color:#475569}
+/* TIRAGE */
+.tirage-hero{background:linear-gradient(135deg,#111827,#0f2040);border:1px solid #1e3a8a;border-radius:16px;padding:48px;text-align:center;margin-bottom:24px}
+.info-strip{display:inline-flex;gap:24px;background:#0b1120;border:1px solid #1e293b;border-radius:10px;padding:10px 24px;margin:16px 0;font-size:.875rem}
+.info-strip span{color:#64748b} .info-strip strong{color:#60a5fa}
+.wheel-layout{display:grid;grid-template-columns:460px 1fr;gap:24px;align-items:start}
+@media(max-width:1000px){.wheel-layout{grid-template-columns:1fr}}
+.wheel-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;position:relative}
+.wheel-pointer-wrap{position:absolute;top:-2px;left:50%;transform:translateX(-50%);z-index:2;pointer-events:none}
+.brand-rem-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:20px}
+.brand-rem-card{background:#111827;border:1.5px solid #1e293b;border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px;transition:all .3s}
+.brand-rem-card.exhausted{opacity:.3;filter:grayscale(1)}
+.brand-rem-logo{width:36px;height:36px;border-radius:8px;background:#0b1120;display:flex;align-items:center;justify-content:center;font-size:1.2rem;overflow:hidden;flex-shrink:0}
+.brand-rem-logo img{width:100%;height:100%;object-fit:contain}
+.brand-rem-name{font-size:.8rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand-rem-count{font-size:1.1rem;font-weight:900;line-height:1}
+.winners-panel{background:#111827;border:1px solid #1e293b;border-radius:14px;overflow:hidden;margin-bottom:14px}
+.w-card{padding:13px 18px;border-bottom:1px solid #0b1120;display:flex;align-items:center;gap:12px;animation:slideIn .35s ease both}
+.w-card:last-child{border-bottom:none}
+.w-card:nth-child(odd){background:#0d1628}
+@keyframes slideIn{from{transform:translateX(24px);opacity:0}to{transform:translateX(0);opacity:1}}
+.w-num{width:26px;height:26px;border-radius:50%;background:#1e3a8a;color:#93c5fd;font-size:.72rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.w-name{font-weight:700;font-size:.92rem}
+.w-etab{font-size:.76rem;color:#475569;margin-top:1px}
+.hist-wrap{max-height:300px;overflow-y:auto}
+.hist-row{display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid #0b1120;font-size:.82rem}
+.hist-row:nth-child(odd){background:#0d1628}
+.hist-brand-logo{width:22px;height:22px;border-radius:4px;object-fit:contain;background:#0b1120;flex-shrink:0}
 .hidden{display:none!important}
-
-/* SCROLLABLE TABLE */
-.scroll-table{max-height:380px;overflow-y:auto}
-
-/* DRAG NUMBER */
-.order-handle{cursor:grab;color:#334155;font-size:0.9rem;padding-right:4px}
+@keyframes popIn{0%{transform:scale(.8);opacity:0}70%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="header">
   <div class="header-icon">🎰</div>
-  <div>
-    <h1>Tombola Dictée</h1>
-    <div class="header-sub">Système de tirage au sort — Back-Office</div>
-  </div>
+  <div><h1>Tombola Dictée</h1><div class="header-sub">Système de tirage — Back-Office</div></div>
   <div class="pill">ADMIN</div>
 </div>
 
-<!-- TABS -->
 <div class="tabs">
-  <div class="tab active" onclick="showTab('config',this)">
-    ⚙️ Marques
-    <span class="tab-badge" id="tab-badge-brands">0</span>
-  </div>
-  <div class="tab" onclick="showTab('participants',this)">
-    👥 Participants
-    <span class="tab-badge" id="tab-badge-part">0</span>
-  </div>
-  <div class="tab" onclick="showTab('tirage',this)">
-    🎲 Tirage
-  </div>
+  <div class="tab active" onclick="showTab('config',this)">⚙️ Marques <span class="tab-badge" id="tb-brands">0</span></div>
+  <div class="tab" onclick="showTab('participants',this)">👥 Participants <span class="tab-badge" id="tb-part">0</span></div>
+  <div class="tab" onclick="showTab('tirage',this)">🎰 Tirage</div>
 </div>
 
 <div class="content">
 
-<!-- ═══════════════════════════════════════════
-     TAB 1 — CONFIGURATION MARQUES
-═══════════════════════════════════════════ -->
+<!-- CONFIG -->
 <div id="section-config" class="section active">
-
-  <!-- Formulaire ajout/édition -->
   <div class="card">
     <div class="card-title">➕ <span id="form-title">Nouvelle marque</span></div>
-    <div class="form-grid form-grid-3" style="margin-bottom:16px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
       <div class="form-group">
         <label>Nom de la marque *</label>
-        <input type="text" id="f-name" placeholder="ex : Éditions Cérès, Librairie El Amel…">
+        <input type="text" id="f-name" placeholder="ex : Éditions Cérès…">
       </div>
       <div class="form-group">
-        <label>🎁 Nb. de cadeaux <span style="background:#7f1d1d;color:#fca5a5;padding:2px 7px;border-radius:5px;font-size:0.7rem;font-weight:700;letter-spacing:.5px">MAXIMUM — ne sera jamais dépassé</span></label>
+        <label>🎁 Nb. de cadeaux <span style="background:#7f1d1d;color:#fca5a5;padding:2px 7px;border-radius:5px;font-size:.68rem;font-weight:700">MAX — ne sera jamais dépassé</span></label>
         <input type="number" id="f-lots" min="1" max="9999" placeholder="ex : 20">
-      </div>
-      <div style="display:flex;gap:8px;align-items:flex-end">
-        <button class="btn btn-primary" onclick="saveBrand()"><span id="btn-save-label">➕ Ajouter</span></button>
-        <button class="btn btn-ghost" id="btn-cancel" onclick="cancelEdit()" style="display:none">✕</button>
       </div>
     </div>
     <div class="form-group">
+      <label>Logo de la marque</label>
+      <div class="logo-row">
+        <div class="logo-box" id="logo-preview">🏷️</div>
+        <div>
+          <label class="logo-btn" for="logo-input">📁 Choisir une image</label>
+          <input type="file" id="logo-input" accept="image/*" class="hidden" onchange="handleLogo(this)">
+          <div style="margin-top:6px"><button class="btn btn-ghost btn-sm" onclick="clearLogo()">✕ Supprimer</button></div>
+          <div style="font-size:.7rem;color:#334155;margin-top:4px">PNG, JPG, SVG — affiché sur la roue et le projecteur</div>
+        </div>
+      </div>
+      <input type="hidden" id="f-logo">
+    </div>
+    <div class="form-group">
       <label>Niveaux scolaires ciblés *</label>
-      <div class="niveaux-grid" id="form-niveaux">
-        <div class="n-chip" data-val="maternelle" onclick="toggleChip(this)"><div class="dot"></div>🧒 Maternelle</div>
+      <div class="n-chips" id="form-niveaux">
         <div class="n-chip" data-val="primaire" onclick="toggleChip(this)"><div class="dot"></div>📚 Primaire</div>
         <div class="n-chip" data-val="college" onclick="toggleChip(this)"><div class="dot"></div>🏫 Collège</div>
         <div class="n-chip" data-val="lycee" onclick="toggleChip(this)"><div class="dot"></div>🎓 Lycée</div>
-        <div class="n-chip" data-val="superieur" onclick="toggleChip(this)"><div class="dot"></div>🏛️ Supérieur</div>
+        <div class="n-chip" data-val="adulte" onclick="toggleChip(this)"><div class="dot"></div>🧑 Adulte</div>
         <div class="n-chip" data-val="tous" onclick="toggleChip(this)"><div class="dot"></div>✅ Tous niveaux</div>
       </div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-primary" onclick="saveBrand()"><span id="btn-lbl">➕ Ajouter</span></button>
+      <button class="btn btn-ghost" id="btn-cancel" onclick="cancelEdit()" style="display:none">✕ Annuler</button>
     </div>
     <input type="hidden" id="f-edit-id">
   </div>
 
-  <!-- Liste des marques -->
   <div class="card">
-    <div class="card-title">📋 Marques configurées (<span id="brand-count">0</span>)</div>
+    <div class="card-title">📋 Marques (<span id="brand-count">0</span>)</div>
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Marque</th>
-            <th>Niveaux ciblés</th>
-            <th>Lots</th>
-            <th style="text-align:right">Actions</th>
-          </tr>
-        </thead>
-        <tbody id="brands-tbody">
-          <tr><td colspan="5"><div class="empty"><div class="empty-icon">📋</div><p>Aucune marque. Ajoutez-en une ci-dessus.</p></div></td></tr>
-        </tbody>
+        <thead><tr><th>#</th><th>Logo</th><th>Marque</th><th>Niveaux</th><th>Cadeaux max</th><th style="text-align:right">Actions</th></tr></thead>
+        <tbody id="brands-tbody"><tr><td colspan="6" style="text-align:center;color:#334155;padding:32px">Aucune marque.</td></tr></tbody>
       </table>
     </div>
-    <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
-      <button class="btn btn-ghost btn-sm" onclick="exportConfig()">💾 Exporter config JSON</button>
-      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('import-config-input').click()">📂 Importer config JSON</button>
-      <input type="file" id="import-config-input" accept=".json" class="hidden" onchange="importConfig(this)">
+    <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-ghost btn-sm" onclick="exportConfig()">💾 Export JSON</button>
+      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('imp-cfg').click()">📂 Import JSON</button>
+      <input type="file" id="imp-cfg" accept=".json" class="hidden" onchange="importConfig(this)">
     </div>
   </div>
+</div>
 
-</div><!-- /config -->
-
-<!-- ═══════════════════════════════════════════
-     TAB 2 — PARTICIPANTS
-═══════════════════════════════════════════ -->
+<!-- PARTICIPANTS -->
 <div id="section-participants" class="section">
-
-  <!-- Format attendu -->
   <div class="card">
     <div class="card-title">📄 Format du fichier</div>
-    <p style="font-size:0.875rem;color:#64748b;margin-bottom:4px">Le fichier doit contenir ces 3 colonnes (CSV ou Excel) :</p>
-    <div class="format-cols">
-      <div class="format-col">
-        <div style="font-size:1.4rem">👤</div>
-        <div class="fc-name">nom</div>
-        <div class="fc-desc">Nom complet du participant</div>
-      </div>
-      <div class="format-col">
-        <div style="font-size:1.4rem">🏫</div>
-        <div class="fc-name">etablissement</div>
-        <div class="fc-desc">Nom de l'école / lycée</div>
-      </div>
-      <div class="format-col">
-        <div style="font-size:1.4rem">📊</div>
-        <div class="fc-name">niveau</div>
-        <div class="fc-desc">maternelle / primaire / college / lycee / superieur</div>
-      </div>
+    <p style="font-size:.875rem;color:#64748b;margin-bottom:10px">3 colonnes CSV ou Excel :</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+      <div class="format-col"><div style="font-size:1.4rem">👤</div><div class="fc-name">nom</div><div class="fc-desc">Nom complet</div></div>
+      <div class="format-col"><div style="font-size:1.4rem">🏫</div><div class="fc-name">etablissement</div><div class="fc-desc">Nom de l'école</div></div>
+      <div class="format-col"><div style="font-size:1.4rem">📊</div><div class="fc-name">niveau</div><div class="fc-desc">primaire / college / lycee / adulte</div></div>
     </div>
-    <button class="btn btn-gold btn-sm" onclick="downloadTemplate()" style="margin-top:8px">⬇️ Télécharger le modèle Excel</button>
+    <button class="btn btn-gold btn-sm" onclick="downloadTemplate()">⬇️ Télécharger le modèle Excel</button>
   </div>
-
-  <!-- Zone upload -->
   <div class="card">
-    <div class="card-title">📂 Importer les participants</div>
-    <div class="drop-zone" id="drop-zone"
-         onclick="document.getElementById('file-input').click()"
+    <div class="card-title">📂 Importer</div>
+    <div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()"
          ondragover="event.preventDefault();this.classList.add('drag')"
          ondragleave="this.classList.remove('drag')"
          ondrop="handleDrop(event)">
-      <div class="dz-icon">📁</div>
-      <h3>Glissez votre fichier ici</h3>
-      <p>ou cliquez pour parcourir — CSV, XLSX, XLS acceptés</p>
+      <div style="font-size:3rem;margin-bottom:12px">📁</div>
+      <h3 style="font-size:1rem;font-weight:600;margin-bottom:6px">Glissez votre fichier ici</h3>
+      <p style="font-size:.8rem;color:#475569">ou cliquez — CSV, XLSX, XLS</p>
       <input type="file" id="file-input" accept=".csv,.xlsx,.xls" class="hidden" onchange="handleFile(this.files[0]);this.value=''">
     </div>
   </div>
-
-  <!-- Aperçu (caché tant que pas de fichier) -->
   <div id="part-preview" class="hidden">
     <div class="stats-row">
       <div class="stat"><div class="stat-num" id="s-total">0</div><div class="stat-lbl">Total participants</div></div>
       <div class="stat"><div class="stat-num" id="s-niv">0</div><div class="stat-lbl">Niveaux représentés</div></div>
       <div class="stat"><div class="stat-num" id="s-etab">0</div><div class="stat-lbl">Établissements</div></div>
-      <div class="stat"><div class="stat-num" id="s-invalides" style="color:#f87171">0</div><div class="stat-lbl">Lignes ignorées</div></div>
+      <div class="stat"><div class="stat-num" id="s-inv" style="color:#f87171">0</div><div class="stat-lbl">Lignes ignorées</div></div>
     </div>
-
-    <div id="warn-niveaux" class="warn-bar hidden" style="margin-bottom:16px">
-      ⚠️ <span id="warn-niveaux-text"></span>
-    </div>
-
+    <div id="warn-niv" class="warn-bar hidden" style="margin-bottom:14px">⚠️ <span id="warn-niv-txt"></span></div>
     <div class="card">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-        <div class="card-title" style="margin:0">👁️ Aperçu (100 premières lignes)</div>
-        <button class="btn btn-danger btn-sm" onclick="clearParticipants()">🗑️ Vider</button>
+        <div class="card-title" style="margin:0">👁️ Aperçu</div>
+        <button class="btn btn-danger btn-sm" onclick="clearPart()">🗑️ Vider</button>
       </div>
-      <div class="table-wrap scroll-table">
-        <table>
-          <thead><tr><th>#</th><th>Nom</th><th>Établissement</th><th>Niveau</th></tr></thead>
-          <tbody id="part-tbody"></tbody>
-        </table>
+      <div style="overflow-x:auto;max-height:360px;overflow-y:auto;">
+        <table><thead><tr><th>#</th><th>Nom</th><th>Établissement</th><th>Niveau</th></tr></thead>
+        <tbody id="part-tbody"></tbody></table>
       </div>
     </div>
   </div>
+</div>
 
-</div><!-- /participants -->
-
-<!-- ═══════════════════════════════════════════
-     TAB 3 — TIRAGE
-═══════════════════════════════════════════ -->
+<!-- TIRAGE -->
 <div id="section-tirage" class="section">
-
-  <!-- ÉTAPE 1 : Écran de départ -->
   <div id="tirage-hero" class="tirage-hero">
-    <div class="hero-icon">🎰</div>
-    <h2>Prêt pour le tirage</h2>
-    <p>Tirage cadeau par cadeau — chaque marque disparaît quand ses cadeaux sont épuisés.<br>Chaque participant ne peut gagner qu'une seule fois.</p>
-    <div class="info-strip" style="margin-top:16px">
-      <div><span>Marques : </span><strong id="hero-brands">0</strong></div>
-      <div><span>Cadeaux total : </span><strong id="hero-lots">0</strong></div>
-      <div><span>Participants : </span><strong id="hero-part">0</strong></div>
+    <div style="font-size:4rem;margin-bottom:16px">🎰</div>
+    <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:10px">Prêt pour le tirage</h2>
+    <p style="color:#64748b;font-size:.9rem">La roue choisit la marque — <strong style="color:#f59e0b">5 gagnants</strong> tirés à chaque spin.<br>Chaque participant ne peut gagner qu'une seule fois.</p>
+    <div class="info-strip">
+      <div><span>Marques : </span><strong id="hero-b">0</strong></div>
+      <div><span>Cadeaux : </span><strong id="hero-l">0</strong></div>
+      <div><span>Participants : </span><strong id="hero-p">0</strong></div>
     </div>
-    <br><br>
-    <button class="btn btn-gold" style="font-size:1.05rem;padding:14px 40px" onclick="demarrerTirage()">🎲 Démarrer le tirage</button>
+    <br>
+    <button class="btn btn-gold" style="font-size:1rem;padding:14px 40px" onclick="demarrerTirage()">🎲 Démarrer</button>
   </div>
 
-  <!-- ÉTAPE 2 : Tirage en live -->
   <div id="tirage-live" class="hidden">
-
-    <!-- Barre du haut -->
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px">
-      <div style="display:flex;align-items:center;gap:14px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+      <div>
         <h2 style="font-size:1.1rem;font-weight:800">Tirage en cours</h2>
-        <span class="badge b-amber" id="live-progress">0 / 0 cadeaux distribués</span>
+        <div style="font-size:.8rem;color:#475569;margin-top:2px" id="live-prog"></div>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn btn-success btn-sm" onclick="exportResultsExcel()">⬇️ Exporter Excel</button>
+        <button class="btn btn-success btn-sm" onclick="exportExcel()">⬇️ Exporter Excel</button>
         <button class="btn btn-danger btn-sm" onclick="resetTirage()">🔄 Recommencer</button>
       </div>
     </div>
 
-    <div class="live-layout">
+    <div class="brand-rem-grid" id="brand-rem-grid"></div>
 
-      <!-- Colonne gauche : marques + dernier gagnant -->
-      <div>
-
-        <!-- Flash dernier gagnant -->
-        <div class="winner-flash hidden" id="winner-flash">
-          <div class="wf-brand" id="wf-brand">—</div>
-          <div style="font-size:2rem;margin-bottom:6px">🎉</div>
-          <div class="wf-name" id="wf-name">—</div>
-          <div class="wf-etab" id="wf-etab">—</div>
-          <div class="wf-count" id="wf-count"></div>
+    <div class="wheel-layout">
+      <div class="wheel-wrap">
+        <div style="position:relative;display:inline-block">
+          <div class="wheel-pointer-wrap">
+            <svg width="28" height="36" viewBox="0 0 28 36"><polygon points="14,2 2,34 26,34" fill="#f59e0b" filter="drop-shadow(0 2px 6px #f59e0b80)"/></svg>
+          </div>
+          <canvas id="wheel-canvas" width="440" height="440" style="border-radius:50%;display:block"></canvas>
         </div>
-
-        <!-- Grille des marques actives -->
-        <div style="margin-bottom:12px;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#475569">
-          Marques actives — cliquez pour tirer un cadeau
-        </div>
-        <div class="brand-cards-grid" id="brand-cards-grid"></div>
-
-        <!-- Message fin -->
-        <div id="tirage-fini" class="hidden" style="text-align:center;padding:40px;background:#111827;border:1px solid #166534;border-radius:14px;margin-top:16px">
-          <div style="font-size:3rem;margin-bottom:12px">🏆</div>
-          <h3 style="font-size:1.2rem;font-weight:800;color:#4ade80;margin-bottom:8px">Tous les cadeaux ont été distribués !</h3>
-          <p style="color:#475569;font-size:0.875rem;margin-bottom:20px">Le tirage est terminé. Exportez les résultats ci-dessus.</p>
-        </div>
+        <button class="btn btn-gold" id="spin-btn" style="font-size:1rem;padding:12px 36px;width:300px;margin-top:6px" onclick="spinWheel()">🎲 Lancer la roue</button>
+        <div id="spin-msg" style="font-size:.85rem;color:#475569;text-align:center;min-height:20px"></div>
       </div>
 
-      <!-- Colonne droite : historique -->
-      <div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="winners-panel">
+          <div style="padding:13px 18px;background:#0b1120;border-bottom:1px solid #1e293b;display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#475569">5 Derniers gagnants</span>
+            <span class="badge b-amber" id="last-brand-badge">—</span>
+          </div>
+          <div id="winners-cards"><div style="padding:28px;text-align:center;color:#334155;font-size:.875rem">Lancez la roue pour commencer</div></div>
+        </div>
+
         <div class="card" style="padding:0;overflow:hidden">
-          <div style="padding:14px 16px;background:#0b1120;border-bottom:1px solid #1e293b;display:flex;align-items:center;justify-content:space-between">
-            <span style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#475569">Historique</span>
+          <div style="padding:12px 16px;background:#0b1120;border-bottom:1px solid #1e293b;display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#475569">Historique</span>
             <span class="badge b-gray" id="hist-count">0 gagnant(s)</span>
           </div>
-          <div class="history-list" id="history-list">
-            <div style="padding:20px;text-align:center;color:#334155;font-size:0.82rem">Aucun tirage pour l'instant</div>
+          <div class="hist-wrap" id="hist-list">
+            <div style="padding:18px;text-align:center;color:#334155;font-size:.82rem">Aucun tirage</div>
           </div>
         </div>
       </div>
+    </div>
 
+    <div id="tirage-fini" class="hidden" style="text-align:center;padding:40px;background:#111827;border:1px solid #166534;border-radius:14px;margin-top:16px">
+      <div style="font-size:3rem;margin-bottom:12px">🏆</div>
+      <h3 style="font-size:1.2rem;font-weight:800;color:#4ade80;margin-bottom:8px">Tous les cadeaux ont été distribués !</h3>
+      <button class="btn btn-success" style="margin-top:12px" onclick="exportExcel()">⬇️ Exporter les résultats</button>
     </div>
   </div>
+</div>
 
-</div><!-- /tirage -->
-
-</div><!-- /content -->
+</div>
 
 <script>
-// ================================================================
-// STATE
-// ================================================================
-let brands = JSON.parse(localStorage.getItem('tombola_brands') || '[]');
-let participants = [];
-let editingId = null;
+// ═══════════ CONSTANTES ═══════════
+const NIV={primaire:'📚 Primaire',college:'🏫 Collège',lycee:'🎓 Lycée',adulte:'🧑 Adulte',tous:'✅ Tous'};
+const NIV_VALID=['primaire','college','lycee','adulte'];
+const NIV_ALIASES={primaire:'primaire',primary:'primaire',pr:'primaire',college:'college','collège':'college',col:'college','6e':'college','5e':'college','4e':'college','3e':'college',lycee:'lycee','lycée':'lycee',ly:'lycee','2nde':'lycee','1ere':'lycee',terminale:'lycee',tle:'lycee',adulte:'adulte',adult:'adulte'};
+const COLORS=['#1e3a8a','#7c3aed','#b45309','#065f46','#9f1239','#1e40af','#6d28d9','#92400e','#134e4a','#881337','#312e81','#44403c','#164e63','#4a1942','#1c1917'];
 
-const NIV_LABELS = {
-  maternelle:'🧒 Maternelle', primaire:'📚 Primaire',
-  college:'🏫 Collège', lycee:'🎓 Lycée',
-  superieur:'🏛️ Supérieur', tous:'✅ Tous'
-};
-const NIV_VALID = ['maternelle','primaire','college','lycee','superieur'];
+// ═══════════ STATE ═══════════
+let brands=JSON.parse(localStorage.getItem('tombola_brands')||'[]');
+let participants=[];
+let liveState=null;
+let wheelRot=0, spinning=false;
+let segImgs={};
 
-// ================================================================
-// TABS
-// ================================================================
-function showTab(name, el) {
+// ═══════════ TABS ═══════════
+function showTab(n,el){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('section-'+name).classList.add('active');
+  document.getElementById('section-'+n).classList.add('active');
   el.classList.add('active');
-  if(name==='tirage') refreshTirageHero();
+  if(n==='tirage') refreshHero();
 }
 
-// ================================================================
-// NIVEAU CHIPS (formulaire)
-// ================================================================
-function toggleChip(el) {
-  const val = el.dataset.val;
-  const wasOn = el.classList.contains('on');
-  if(val==='tous') {
-    document.querySelectorAll('#form-niveaux .n-chip').forEach(c=>{
-      c.classList.remove('on');
-    });
-    if(!wasOn) el.classList.add('on');
-  } else {
-    document.querySelector('#form-niveaux .n-chip[data-val="tous"]').classList.remove('on');
-    el.classList.toggle('on', !wasOn);
-  }
+// ═══════════ CHIPS ═══════════
+function toggleChip(el){
+  const v=el.dataset.val,was=el.classList.contains('on');
+  if(v==='tous'){document.querySelectorAll('#form-niveaux .n-chip').forEach(c=>c.classList.remove('on'));if(!was)el.classList.add('on');}
+  else{document.querySelector('#form-niveaux .n-chip[data-val="tous"]').classList.remove('on');el.classList.toggle('on',!was);}
 }
-function getSelectedNiveaux() {
-  return [...document.querySelectorAll('#form-niveaux .n-chip.on')].map(c=>c.dataset.val);
+function getChips(){return[...document.querySelectorAll('#form-niveaux .n-chip.on')].map(c=>c.dataset.val);}
+function setChips(arr){document.querySelectorAll('#form-niveaux .n-chip').forEach(c=>c.classList.toggle('on',arr.includes(c.dataset.val)));}
+
+// ═══════════ LOGO ═══════════
+function handleLogo(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    document.getElementById('f-logo').value=e.target.result;
+    document.getElementById('logo-preview').innerHTML=`<img src="${e.target.result}" style="width:100%;height:100%;object-fit:contain">`;
+  };
+  r.readAsDataURL(f);
 }
-function setSelectedNiveaux(arr) {
-  document.querySelectorAll('#form-niveaux .n-chip').forEach(c=>{
-    c.classList.toggle('on', arr.includes(c.dataset.val));
-  });
+function clearLogo(){
+  document.getElementById('f-logo').value='';
+  document.getElementById('logo-preview').innerHTML='🏷️';
+  document.getElementById('logo-input').value='';
 }
 
-// ================================================================
-// BRANDS — CRUD
-// ================================================================
-function saveBrand() {
-  const name = document.getElementById('f-name').value.trim();
-  const lots = parseInt(document.getElementById('f-lots').value);
-  const niveaux = getSelectedNiveaux();
-  if(!name) { flashInput('f-name','Entrez le nom'); return; }
-  if(!lots||lots<1) { flashInput('f-lots','Nombre invalide'); return; }
-  if(!niveaux.length) { alert('Sélectionnez au moins un niveau scolaire.'); return; }
-
-  if(editingId) {
-    const idx = brands.findIndex(b=>b.id===editingId);
-    if(idx>-1) brands[idx] = {...brands[idx], name, lots, niveaux};
-  } else {
-    brands.push({id: Date.now()+'_'+Math.random().toString(36).slice(2,6), name, lots, niveaux});
-  }
-  persistBrands();
-  renderBrands();
-  cancelEdit();
+// ═══════════ BRANDS CRUD ═══════════
+function saveBrand(){
+  const name=document.getElementById('f-name').value.trim();
+  const lots=parseInt(document.getElementById('f-lots').value);
+  const niveaux=getChips();
+  const logo=document.getElementById('f-logo').value;
+  const eid=document.getElementById('f-edit-id').value;
+  if(!name){flash('f-name','Entrez le nom');return;}
+  if(!lots||lots<1){flash('f-lots','Nombre invalide');return;}
+  if(!niveaux.length){alert('Sélectionnez au moins un niveau.');return;}
+  if(eid){const i=brands.findIndex(b=>b.id===eid);if(i>-1)brands[i]={...brands[i],name,lots,niveaux,logo};}
+  else brands.push({id:Date.now()+'_'+Math.random().toString(36).slice(2,5),name,lots,niveaux,logo});
+  saveBrands();renderBrands();cancelEdit();
 }
-
-function cancelEdit() {
-  editingId = null;
-  document.getElementById('f-name').value='';
-  document.getElementById('f-lots').value='';
-  document.getElementById('f-edit-id').value='';
-  setSelectedNiveaux([]);
+function cancelEdit(){
+  document.getElementById('f-name').value='';document.getElementById('f-lots').value='';
+  document.getElementById('f-edit-id').value='';setChips([]);clearLogo();
   document.getElementById('form-title').textContent='Nouvelle marque';
-  document.getElementById('btn-save-label').textContent='➕ Ajouter';
+  document.getElementById('btn-lbl').textContent='➕ Ajouter';
   document.getElementById('btn-cancel').style.display='none';
 }
-
-function editBrand(id) {
-  const b = brands.find(b=>b.id===id);
-  if(!b) return;
-  editingId = id;
-  document.getElementById('f-name').value = b.name;
-  document.getElementById('f-lots').value = b.lots;
-  setSelectedNiveaux(b.niveaux);
-  document.getElementById('form-title').textContent = 'Modifier : '+b.name;
-  document.getElementById('btn-save-label').textContent = '✏️ Mettre à jour';
-  document.getElementById('btn-cancel').style.display = '';
+function editBrand(id){
+  const b=brands.find(b=>b.id===id);if(!b)return;
+  document.getElementById('f-name').value=b.name;document.getElementById('f-lots').value=b.lots;
+  document.getElementById('f-edit-id').value=b.id;setChips(b.niveaux);
+  document.getElementById('f-logo').value=b.logo||'';
+  document.getElementById('logo-preview').innerHTML=b.logo?`<img src="${b.logo}" style="width:100%;height:100%;object-fit:contain">`:'🏷️';
+  document.getElementById('form-title').textContent='Modifier : '+b.name;
+  document.getElementById('btn-lbl').textContent='✏️ Mettre à jour';
+  document.getElementById('btn-cancel').style.display='';
   window.scrollTo({top:0,behavior:'smooth'});
 }
-
-function deleteBrand(id) {
-  const b = brands.find(b=>b.id===id);
-  if(!b) return;
-  if(!confirm('Supprimer la marque "'+b.name+'" ?')) return;
-  brands = brands.filter(b=>b.id!==id);
-  persistBrands();
-  renderBrands();
-}
-
-function moveBrand(id, dir) {
-  const idx = brands.findIndex(b=>b.id===id);
-  const newIdx = idx+dir;
-  if(newIdx<0||newIdx>=brands.length) return;
-  [brands[idx],brands[newIdx]] = [brands[newIdx],brands[idx]];
-  persistBrands();
-  renderBrands();
-}
-
-function persistBrands() {
-  localStorage.setItem('tombola_brands', JSON.stringify(brands));
-  document.getElementById('tab-badge-brands').textContent = brands.length;
-}
-
-function renderBrands() {
-  const tbody = document.getElementById('brands-tbody');
-  document.getElementById('brand-count').textContent = brands.length;
-  document.getElementById('tab-badge-brands').textContent = brands.length;
-  if(!brands.length) {
-    tbody.innerHTML='<tr><td colspan="5"><div class="empty"><div class="empty-icon">📋</div><p>Aucune marque. Ajoutez-en une ci-dessus.</p></div></td></tr>';
-    return;
-  }
-  const totalLots = brands.reduce((s,b)=>s+b.lots,0);
-  tbody.innerHTML = brands.map((b,i)=>`
+function deleteBrand(id){const b=brands.find(b=>b.id===id);if(!b||!confirm('Supprimer "'+b.name+'" ?'))return;brands=brands.filter(b=>b.id!==id);saveBrands();renderBrands();}
+function moveBrand(id,d){const i=brands.findIndex(b=>b.id===id),ni=i+d;if(ni<0||ni>=brands.length)return;[brands[i],brands[ni]]=[brands[ni],brands[i]];saveBrands();renderBrands();}
+function saveBrands(){localStorage.setItem('tombola_brands',JSON.stringify(brands));document.getElementById('tb-brands').textContent=brands.length;}
+function renderBrands(){
+  document.getElementById('brand-count').textContent=brands.length;
+  document.getElementById('tb-brands').textContent=brands.length;
+  const tb=document.getElementById('brands-tbody');
+  if(!brands.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:#334155;padding:28px">Aucune marque.</td></tr>';return;}
+  tb.innerHTML=brands.map((b,i)=>`
     <tr>
-      <td>
-        <div style="display:flex;align-items:center;gap:6px">
-          <span style="color:#334155;font-size:0.8rem">${i+1}</span>
-          <div style="display:flex;flex-direction:column;gap:2px">
-            <button class="btn btn-ghost btn-sm" style="padding:2px 6px;font-size:0.65rem;line-height:1" onclick="moveBrand('${b.id}',-1)" ${i===0?'disabled':''}>▲</button>
-            <button class="btn btn-ghost btn-sm" style="padding:2px 6px;font-size:0.65rem;line-height:1" onclick="moveBrand('${b.id}',1)" ${i===brands.length-1?'disabled':''}>▼</button>
-          </div>
-        </div>
-      </td>
+      <td><div style="display:flex;align-items:center;gap:4px"><span style="color:#334155;font-size:.8rem">${i+1}</span>
+        <div style="display:flex;flex-direction:column;gap:1px">
+          <button class="btn btn-ghost btn-sm" style="padding:2px 5px;font-size:.6rem" onclick="moveBrand('${b.id}',-1)" ${i===0?'disabled':''}>▲</button>
+          <button class="btn btn-ghost btn-sm" style="padding:2px 5px;font-size:.6rem" onclick="moveBrand('${b.id}',1)" ${i===brands.length-1?'disabled':''}>▼</button>
+        </div></div></td>
+      <td>${b.logo?`<img src="${b.logo}" style="width:40px;height:40px;border-radius:8px;object-fit:contain;background:#0b1120;border:1px solid #1e293b">`:`<div style="width:40px;height:40px;border-radius:8px;background:#0b1120;border:1px solid #1e293b;display:flex;align-items:center;justify-content:center">🏷️</div>`}</td>
       <td><strong>${b.name}</strong></td>
-      <td>${b.niveaux.map(n=>`<span class="badge b-blue" style="margin:2px">${NIV_LABELS[n]||n}</span>`).join('')}</td>
-      <td><span class="badge b-amber" title="Maximum de cadeaux à distribuer — jamais dépassé">🎁 ${b.lots} cadeaux max</span></td>
+      <td>${b.niveaux.map(n=>`<span class="badge b-blue" style="margin:2px">${NIV[n]||n}</span>`).join('')}</td>
+      <td><span class="badge b-amber">🎁 ${b.lots} max</span></td>
       <td style="text-align:right">
         <button class="btn btn-ghost btn-sm" onclick="editBrand('${b.id}')">✏️</button>
         <button class="btn btn-danger btn-sm" onclick="deleteBrand('${b.id}')" style="margin-left:6px">🗑️</button>
       </td>
-    </tr>
-  `).join('');
+    </tr>`).join('');
 }
+function exportConfig(){const b=new Blob([JSON.stringify(brands,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='tombola-config.json';a.click();}
+function importConfig(inp){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{try{const d=JSON.parse(e.target.result);if(!Array.isArray(d))throw 0;if(!confirm(`Importer ${d.length} marque(s) ?`))return;brands=d;saveBrands();renderBrands();}catch{alert('JSON invalide');}};r.readAsText(f);}
 
-// ================================================================
-// CONFIG EXPORT / IMPORT
-// ================================================================
-function exportConfig() {
-  const blob = new Blob([JSON.stringify(brands,null,2)], {type:'application/json'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'tombola-config.json';
-  a.click();
+// ═══════════ PARTICIPANTS ═══════════
+function downloadTemplate(){
+  const ws=XLSX.utils.aoa_to_sheet([['nom','etablissement','niveau'],['Ahmed Ben Ali','École Ibn Sina','primaire'],['Sara Mansouri','Collège El Amel','college'],['Youssef Tebbal','Lycée Bourguiba','lycee'],['Nadia Trabelsi','Université de Tunis','adulte']]);
+  ws['!cols']=[{wch:30},{wch:40},{wch:12}];
+  const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Participants');XLSX.writeFile(wb,'modele_participants.xlsx');
 }
-function importConfig(input) {
-  const file = input.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    try {
-      const data = JSON.parse(e.target.result);
-      if(!Array.isArray(data)) throw new Error('Format invalide');
-      if(!confirm(`Importer ${data.length} marque(s) ? (Cela remplacera la configuration actuelle)`)) return;
-      brands = data;
-      persistBrands();
-      renderBrands();
-      alert('Configuration importée avec succès ✅');
-    } catch(err) {
-      alert('Fichier JSON invalide : '+err.message);
-    }
-  };
-  reader.readAsText(file);
+function handleDrop(e){e.preventDefault();document.getElementById('drop-zone').classList.remove('drag');if(e.dataTransfer.files[0])handleFile(e.dataTransfer.files[0]);}
+function handleFile(f){
+  const ext=f.name.split('.').pop().toLowerCase();
+  if(ext==='csv'){const r=new FileReader();r.onload=e=>parseCSV(e.target.result);r.readAsText(f,'UTF-8');}
+  else if(['xlsx','xls'].includes(ext)){const r=new FileReader();r.onload=e=>parseXL(e.target.result);r.readAsArrayBuffer(f);}
+  else alert('Format non supporté.');
 }
-
-// ================================================================
-// TEMPLATE DOWNLOAD
-// ================================================================
-function downloadTemplate() {
-  const ws = XLSX.utils.aoa_to_sheet([
-    ['nom','etablissement','niveau'],
-    ['Ahmed Ben Ali','École Primaire Ibn Sina','primaire'],
-    ['Sara Mansouri','Collège El Amel','college'],
-    ['Youssef Tebbal','Lycée Habib Bourguiba','lycee'],
-    ['Nour Chebbi','École Maternelle Les Étoiles','maternelle'],
-    ['Khalil Dridi','Université de Tunis','superieur'],
-  ]);
-  ws['!cols'] = [{wch:30},{wch:40},{wch:15}];
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'Participants');
-  XLSX.writeFile(wb, 'modele_participants.xlsx');
+function parseCSV(txt){
+  const lines=txt.trim().split(/\r?\n/),sep=lines[0].includes(';')?';':',';
+  const hdrs=lines[0].split(sep).map(h=>h.trim().toLowerCase().replace(/["ï»¿]/g,''));
+  const rows=[];
+  for(let i=1;i<lines.length;i++){const v=lines[i].split(sep).map(v=>v.trim().replace(/"/g,''));if(!v.join('').trim())continue;const r={};hdrs.forEach((h,j)=>r[h]=v[j]||'');rows.push(r);}
+  loadPart(rows);
 }
-
-// ================================================================
-// FILE IMPORT
-// ================================================================
-function handleDrop(e) {
-  e.preventDefault();
-  document.getElementById('drop-zone').classList.remove('drag');
-  const file = e.dataTransfer.files[0];
-  if(file) handleFile(file);
+function parseXL(buf){
+  const wb=XLSX.read(buf,{type:'array'});
+  const raw=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:''});
+  loadPart(raw.map(r=>{const n={};Object.keys(r).forEach(k=>n[k.toLowerCase().trim()]=String(r[k]).trim());return n;}));
 }
-
-function handleFile(file) {
-  if(!file) return;
-  const ext = file.name.split('.').pop().toLowerCase();
-  if(ext==='csv') {
-    const reader = new FileReader();
-    reader.onload = e => parseCSV(e.target.result);
-    reader.readAsText(file,'UTF-8');
-  } else if(['xlsx','xls'].includes(ext)) {
-    const reader = new FileReader();
-    reader.onload = e => parseExcel(e.target.result);
-    reader.readAsArrayBuffer(file);
-  } else {
-    alert('Format non supporté. Utilisez CSV, XLSX ou XLS.');
-  }
-}
-
-function parseCSV(text) {
-  const lines = text.trim().split(/\r?\n/);
-  if(lines.length<2) { alert('Fichier vide ou sans données.'); return; }
-  const sep = lines[0].includes(';') ? ';' : ',';
-  const headers = lines[0].split(sep).map(h=>h.trim().toLowerCase().replace(/["ï»¿]/g,''));
-  const rows = [];
-  for(let i=1;i<lines.length;i++) {
-    const vals = lines[i].split(sep).map(v=>v.trim().replace(/"/g,''));
-    if(vals.join('').trim()==='') continue;
-    const row={};
-    headers.forEach((h,idx)=>row[h]=vals[idx]||'');
-    rows.push(row);
-  }
-  loadParticipants(rows);
-}
-
-function parseExcel(buffer) {
-  const wb = XLSX.read(buffer,{type:'array'});
-  const ws = wb.Sheets[wb.SheetNames[0]];
-  const raw = XLSX.utils.sheet_to_json(ws,{defval:''});
-  const rows = raw.map(r=>{
-    const n={};
-    Object.keys(r).forEach(k=>n[k.toLowerCase().trim()]=String(r[k]).trim());
-    return n;
-  });
-  loadParticipants(rows);
-}
-
-function loadParticipants(rows) {
-  let invalides = 0;
-  const NIV_ALIASES = {
-    'maternelle':'maternelle','matern':'maternelle',
-    'primaire':'primaire','primary':'primaire','pr':'primaire',
-    'college':'college','collège':'college','col':'college','6e':'college','5e':'college','4e':'college','3e':'college',
-    'lycee':'lycee','lycée':'lycee','ly':'lycee','2nde':'lycee','1ere':'lycee','tle':'lycee','terminale':'lycee',
-    'superieur':'superieur','supérieur':'superieur','sup':'superieur','universite':'superieur','université':'superieur'
-  };
-
-  participants = rows.map((row,i)=>{
-    const nom = row['nom']||row['name']||row['prénom nom']||'';
-    const etab = row['etablissement']||row['établissement']||row['ecole']||row['école']||row['school']||'';
-    const nivRaw = (row['niveau']||row['level']||row['classe']||'').toLowerCase().trim();
-    const niveau = NIV_ALIASES[nivRaw] || nivRaw;
-    if(!nom.trim()) { invalides++; return null; }
-    return { id:i, nom:nom.trim(), etablissement:etab.trim(), niveau };
+function loadPart(rows){
+  let inv=0;
+  participants=rows.map((r,i)=>{
+    const nom=r['nom']||r['name']||'';
+    const etab=r['etablissement']||r['établissement']||r['ecole']||r['école']||'';
+    const nRaw=(r['niveau']||r['level']||r['classe']||'').toLowerCase().trim();
+    const niveau=NIV_ALIASES[nRaw]||nRaw;
+    if(!nom.trim()){inv++;return null;}
+    return{id:i,nom:nom.trim(),etablissement:etab.trim(),niveau};
   }).filter(Boolean);
-
-  // Détecter niveaux inconnus
-  const unknownNiveaux = [...new Set(participants.map(p=>p.niveau).filter(n=>n&&!NIV_VALID.includes(n)))];
-  if(unknownNiveaux.length) {
-    document.getElementById('warn-niveaux').classList.remove('hidden');
-    document.getElementById('warn-niveaux-text').textContent =
-      `Niveaux non reconnus : "${unknownNiveaux.join('", "')}" — ces participants ne seront éligibles qu'aux marques "Tous niveaux".`;
-  } else {
-    document.getElementById('warn-niveaux').classList.add('hidden');
-  }
-
-  document.getElementById('s-total').textContent = participants.length;
-  document.getElementById('s-niv').textContent = [...new Set(participants.map(p=>p.niveau).filter(Boolean))].length;
-  document.getElementById('s-etab').textContent = [...new Set(participants.map(p=>p.etablissement).filter(Boolean))].length;
-  document.getElementById('s-invalides').textContent = invalides;
-  document.getElementById('tab-badge-part').textContent = participants.length;
-
-  // Aperçu table
-  const tbody = document.getElementById('part-tbody');
-  const shown = participants.slice(0,100);
-  tbody.innerHTML = shown.map((p,i)=>`
-    <tr>
-      <td style="color:#334155">${i+1}</td>
-      <td>${p.nom}</td>
-      <td>${p.etablissement||'<span style="color:#334155">—</span>'}</td>
-      <td><span class="badge ${nivBadgeClass(p.niveau)}">${NIV_LABELS[p.niveau]||p.niveau||'—'}</span></td>
-    </tr>
-  `).join('');
-  if(participants.length>100) {
-    tbody.innerHTML += `<tr><td colspan="4" style="text-align:center;color:#334155;padding:12px;font-size:0.8rem">… et ${participants.length-100} autres participants non affichés</td></tr>`;
-  }
+  const unkn=[...new Set(participants.map(p=>p.niveau).filter(n=>n&&!NIV_VALID.includes(n)))];
+  const wEl=document.getElementById('warn-niv');
+  if(unkn.length){wEl.classList.remove('hidden');document.getElementById('warn-niv-txt').textContent=`Niveaux inconnus : "${unkn.join('", "')}" — éligibles uniquement pour "Tous".`;}
+  else wEl.classList.add('hidden');
+  document.getElementById('s-total').textContent=participants.length;
+  document.getElementById('s-niv').textContent=[...new Set(participants.map(p=>p.niveau).filter(Boolean))].length;
+  document.getElementById('s-etab').textContent=[...new Set(participants.map(p=>p.etablissement).filter(Boolean))].length;
+  document.getElementById('s-inv').textContent=inv;
+  document.getElementById('tb-part').textContent=participants.length;
+  const tb=document.getElementById('part-tbody');
+  tb.innerHTML=participants.slice(0,100).map((p,i)=>`<tr><td style="color:#334155">${i+1}</td><td>${p.nom}</td><td>${p.etablissement||'—'}</td><td><span class="badge b-blue">${NIV[p.niveau]||p.niveau||'—'}</span></td></tr>`).join('');
+  if(participants.length>100)tb.innerHTML+=`<tr><td colspan="4" style="text-align:center;color:#334155;padding:10px;font-size:.8rem">… et ${participants.length-100} autres</td></tr>`;
   document.getElementById('part-preview').classList.remove('hidden');
 }
+function clearPart(){if(!confirm('Vider la liste ?'))return;participants=[];document.getElementById('part-preview').classList.add('hidden');document.getElementById('tb-part').textContent='0';}
 
-function clearParticipants() {
-  if(!confirm('Vider la liste des participants ?')) return;
-  participants=[];
-  document.getElementById('part-preview').classList.add('hidden');
-  document.getElementById('tab-badge-part').textContent = '0';
+// ═══════════ HERO ═══════════
+function refreshHero(){
+  document.getElementById('hero-b').textContent=brands.length;
+  document.getElementById('hero-l').textContent=brands.reduce((s,b)=>s+b.lots,0);
+  document.getElementById('hero-p').textContent=participants.length;
 }
 
-function nivBadgeClass(n) {
-  return {maternelle:'b-purple',primaire:'b-blue',college:'b-blue',lycee:'b-green',superieur:'b-amber',tous:'b-green'}[n]||'b-gray';
-}
-
-// ================================================================
-// TIRAGE — ÉTAT LIVE
-// ================================================================
-let liveState = null; // { brandStates: [{brand, remaining, winners}], wonIds, history }
-
-function refreshTirageHero() {
-  const totalLots = brands.reduce((s,b)=>s+b.lots,0);
-  document.getElementById('hero-brands').textContent = brands.length;
-  document.getElementById('hero-lots').textContent = totalLots;
-  document.getElementById('hero-part').textContent = participants.length;
-}
-
-function demarrerTirage() {
-  if(!brands.length) { alert('❌ Aucune marque configurée ! Allez dans l\'onglet "Marques".'); return; }
-  if(!participants.length) { alert('❌ Aucun participant chargé ! Allez dans l\'onglet "Participants".'); return; }
-
-  const totalLots = brands.reduce((s,b)=>s+b.lots,0);
-  if(!confirm(`Démarrer le tirage ?\n\n• ${brands.length} marques\n• ${totalLots} cadeaux au total\n• ${participants.length} participants\n\nVous tirerez cadeau par cadeau. Chaque participant ne peut gagner qu'une seule fois.`)) return;
-
-  liveState = {
-    brandStates: brands.map(b=>({ brand:b, remaining:b.lots, winners:[] })),
-    wonIds: new Set(),
-    history: []
-  };
-
+// ═══════════ DÉMARRER ═══════════
+function demarrerTirage(){
+  if(!brands.length){alert('❌ Aucune marque !');return;}
+  if(!participants.length){alert('❌ Aucun participant !');return;}
+  const tot=brands.reduce((s,b)=>s+b.lots,0);
+  if(!confirm(`Démarrer ?\n• ${brands.length} marques\n• ${tot} cadeaux\n• ${participants.length} participants\n\n5 gagnants par spin — chacun ne peut gagner qu'une fois.`))return;
+  liveState={brandStates:brands.map(b=>({brand:b,remaining:b.lots,winners:[]})),wonIds:new Set(),history:[]};
   document.getElementById('tirage-hero').classList.add('hidden');
   document.getElementById('tirage-live').classList.remove('hidden');
-  renderLive();
+  initWheel();renderRemBrands();
 }
 
-// Tirer 1 cadeau pour une marque donnée
-function tirerCadeau(brandStateIdx) {
-  const bs = liveState.brandStates[brandStateIdx];
-  if(bs.remaining <= 0) return;
-
-  // Participants éligibles : bon niveau + pas encore gagnants
-  const eligible = participants.filter(p=>{
-    if(liveState.wonIds.has(p.id)) return false;
-    if(bs.brand.niveaux.includes('tous')) return true;
-    return bs.brand.niveaux.includes(p.niveau);
+// ═══════════ ROUE ═══════════
+function initWheel(){
+  segImgs={};wheelRot=0;
+  liveState.brandStates.forEach(bs=>{
+    if(bs.brand.logo){const img=new Image();img.src=bs.brand.logo;segImgs[bs.brand.id]=img;}
   });
+  setTimeout(drawWheel,100);
+}
 
-  if(!eligible.length) {
-    alert(`⚠️ Plus aucun participant éligible pour "${bs.brand.name}" (niveau : ${bs.brand.niveaux.map(n=>NIV_LABELS[n]||n).join(', ')})`);
-    bs.remaining = 0; // épuiser cette marque
-    renderLive();
-    return;
+function drawWheel(){
+  const cv=document.getElementById('wheel-canvas');if(!cv)return;
+  const ctx=cv.getContext('2d');
+  const cx=cv.width/2,cy=cv.height/2,r=cx-6;
+  const active=liveState.brandStates.filter(bs=>bs.remaining>0);
+  const n=active.length;
+  ctx.clearRect(0,0,cv.width,cv.height);
+  // Bordure extérieure
+  ctx.beginPath();ctx.arc(cx,cy,r+4,0,2*Math.PI);ctx.fillStyle='#1e293b';ctx.fill();
+  if(n===0){
+    ctx.beginPath();ctx.arc(cx,cy,r,0,2*Math.PI);ctx.fillStyle='#111827';ctx.fill();
+    ctx.fillStyle='#475569';ctx.font='bold 20px Segoe UI';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🏆 Terminé',cx,cy);return;
   }
+  const seg=2*Math.PI/n;
+  active.forEach((bs,i)=>{
+    const s=wheelRot+i*seg,e=s+seg,m=s+seg/2;
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,s,e);ctx.closePath();
+    ctx.fillStyle=COLORS[i%COLORS.length];ctx.fill();
+    ctx.strokeStyle='#0b1120';ctx.lineWidth=2.5;ctx.stroke();
+    ctx.save();
+    const tx=cx+Math.cos(m)*(r*0.62),ty=cy+Math.sin(m)*(r*0.62);
+    ctx.translate(tx,ty);ctx.rotate(m+Math.PI/2);
+    const img=segImgs[bs.brand.id];
+    const logoSize=n<=6?42:n<=10?32:24;
+    if(img&&img.complete&&img.naturalWidth>0){
+      ctx.drawImage(img,-logoSize/2,-logoSize/2,logoSize,logoSize);
+      if(n<=8){
+        ctx.font=`bold ${n<=5?11:9}px Segoe UI`;ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='top';
+        ctx.shadowColor='#000';ctx.shadowBlur=4;
+        ctx.fillText(bs.brand.name.slice(0,10)+(bs.brand.name.length>10?'…':''),0,logoSize/2+3);ctx.shadowBlur=0;
+      }
+    } else {
+      ctx.font=`bold ${n<=5?13:n<=8?11:9}px Segoe UI`;ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.shadowColor='#000';ctx.shadowBlur=5;
+      ctx.fillText(bs.brand.name.slice(0,12)+(bs.brand.name.length>12?'…':''),0,0);ctx.shadowBlur=0;
+    }
+    ctx.restore();
+    // Badge restant sur le bord
+    const bx=cx+Math.cos(m)*(r*0.86),by=cy+Math.sin(m)*(r*0.86);
+    ctx.save();ctx.translate(bx,by);
+    ctx.fillStyle='rgba(0,0,0,.55)';ctx.beginPath();ctx.arc(0,0,10,0,2*Math.PI);ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='bold 9px Segoe UI';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(bs.remaining,0,0);ctx.restore();
+  });
+  // Cercle central
+  ctx.beginPath();ctx.arc(cx,cy,26,0,2*Math.PI);
+  ctx.fillStyle='#0b1120';ctx.fill();ctx.strokeStyle='#f59e0b';ctx.lineWidth=3;ctx.stroke();
+  ctx.fillStyle='#f59e0b';ctx.font='bold 12px Segoe UI';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🎲',cx,cy);
+}
 
-  // Tirage aléatoire
-  const winner = eligible[Math.floor(Math.random() * eligible.length)];
-  liveState.wonIds.add(winner.id);
-  bs.winners.push(winner);
-  bs.remaining--;
+function spinWheel(){
+  if(spinning)return;
+  const active=liveState.brandStates.filter(bs=>bs.remaining>0);
+  if(!active.length){document.getElementById('tirage-fini').classList.remove('hidden');document.getElementById('spin-btn').disabled=true;return;}
+  spinning=true;
+  document.getElementById('spin-btn').disabled=true;
+  document.getElementById('spin-msg').textContent='🎡 La roue tourne…';
+  const ti=Math.floor(Math.random()*active.length);
+  const tbs=active[ti];
+  const n=active.length,seg=2*Math.PI/n;
+  const topAngle=-Math.PI/2-(ti*seg+seg/2);
+  const curNorm=((wheelRot%(2*Math.PI))+2*Math.PI)%(2*Math.PI);
+  const tgtNorm=((topAngle%(2*Math.PI))+2*Math.PI)%(2*Math.PI);
+  let diff=tgtNorm-curNorm; if(diff<0)diff+=2*Math.PI;
+  const extra=(5+Math.random()*3)*2*Math.PI;
+  const finalRot=wheelRot+extra+diff;
+  const dur=4500+Math.random()*800;
+  const startRot=wheelRot,t0=performance.now();
+  publishFront({type:'spin_start',brandName:tbs.brand.name,brandLogo:tbs.brand.logo||null,duration:dur});
+  function ease(t){return 1-Math.pow(1-t,5);}
+  function anim(now){
+    const t=Math.min((now-t0)/dur,1);
+    wheelRot=startRot+(finalRot-startRot)*ease(t);
+    drawWheel();
+    if(t<1)requestAnimationFrame(anim);
+    else{wheelRot=finalRot;drawWheel();spinning=false;onStopped(tbs);}
+  }
+  requestAnimationFrame(anim);
+}
 
-  // Historique
-  liveState.history.unshift({ brand: bs.brand.name, winner, num: liveState.history.length + 1 });
-
-  // Publier vers le front (projecteur)
-  const totalDone = liveState.brandStates.reduce((s,b)=>s+b.winners.length,0);
-  const totalMax  = liveState.brandStates.reduce((s,b)=>s+b.brand.lots,0);
-  localStorage.setItem('tombola_live_event', JSON.stringify({
-    id: Date.now(),
-    type: 'winner',
-    winner,
-    brandName: bs.brand.name,
-    totalDone,
-    totalMax,
-    brandStates: liveState.brandStates.map(b=>({ name:b.brand.name, remaining:b.remaining, max:b.brand.lots }))
+function onStopped(tbs){
+  const bsIdx=liveState.brandStates.findIndex(b=>b.brand.id===tbs.brand.id);
+  const bs=liveState.brandStates[bsIdx];
+  document.getElementById('spin-msg').textContent=`✅ ${bs.brand.name} sélectionnée !`;
+  const eligible=shuffle(participants.filter(p=>{
+    if(liveState.wonIds.has(p.id))return false;
+    if(bs.brand.niveaux.includes('tous'))return true;
+    return bs.brand.niveaux.includes(p.niveau);
   }));
-
-  // Flash gagnant BO
-  showWinnerFlash(bs.brand.name, winner, bs.winners.length, bs.brand.lots);
-
-  renderLive();
+  const toTake=Math.min(5,bs.remaining,eligible.length);
+  if(toTake===0){alert(`⚠️ Plus de participants éligibles pour "${bs.brand.name}"`);bs.remaining=0;drawWheel();renderRemBrands();document.getElementById('spin-btn').disabled=false;return;}
+  const winners=eligible.slice(0,toTake);
+  winners.forEach(w=>liveState.wonIds.add(w.id));
+  bs.winners.push(...winners);bs.remaining-=winners.length;
+  liveState.history.unshift({brand:bs.brand,winners});
+  const done=liveState.brandStates.reduce((s,b)=>s+b.winners.length,0);
+  const max=liveState.brandStates.reduce((s,b)=>s+b.brand.lots,0);
+  document.getElementById('live-prog').textContent=`${done} / ${max} cadeaux distribués`;
+  publishFront({type:'winners',brandName:bs.brand.name,brandLogo:bs.brand.logo||null,winners,done,max,
+    brandStates:liveState.brandStates.map(b=>({id:b.brand.id,name:b.brand.name,logo:b.brand.logo||null,remaining:b.remaining,max:b.brand.lots}))});
+  renderWinners(bs.brand,winners);renderHistory();renderRemBrands();drawWheel();
+  document.getElementById('spin-btn').disabled=false;
+  if(liveState.brandStates.every(b=>b.remaining===0)){document.getElementById('tirage-fini').classList.remove('hidden');document.getElementById('spin-btn').disabled=true;}
 }
 
-function showWinnerFlash(brandName, winner, done, max) {
-  const f = document.getElementById('winner-flash');
-  f.classList.remove('hidden','pop');
-  void f.offsetWidth; // reflow pour relancer l'animation
-  f.classList.add('pop');
-  document.getElementById('wf-brand').textContent = brandName;
-  document.getElementById('wf-name').textContent = winner.nom;
-  document.getElementById('wf-etab').textContent = winner.etablissement || '—';
-  document.getElementById('wf-count').textContent = `${done} / ${max} cadeaux attribués pour cette marque`;
+function renderWinners(brand,winners){
+  document.getElementById('last-brand-badge').textContent=brand.name;
+  document.getElementById('winners-cards').innerHTML=winners.map((w,i)=>`
+    <div class="w-card" style="animation-delay:${i*.12}s">
+      <div class="w-num">${i+1}</div>
+      <div style="flex:1"><div class="w-name">${w.nom}</div><div class="w-etab">${w.etablissement||'—'}</div></div>
+      <span class="badge b-blue" style="font-size:.68rem">${NIV[w.niveau]||w.niveau||'—'}</span>
+    </div>`).join('');
 }
 
-function renderLive() {
-  const totalMax = liveState.brandStates.reduce((s,b)=>s+b.brand.lots,0);
-  const totalDone = liveState.brandStates.reduce((s,b)=>s+b.winners.length,0);
-  const actives = liveState.brandStates.filter(b=>b.remaining>0);
-
-  document.getElementById('live-progress').textContent = `${totalDone} / ${totalMax} cadeaux distribués`;
-
-  // Grille des marques
-  const grid = document.getElementById('brand-cards-grid');
-  grid.innerHTML = liveState.brandStates.map((bs,idx)=>{
-    const exhausted = bs.remaining === 0;
-    return `
-      <div class="brand-card ${exhausted?'exhausted':''}" onclick="${exhausted?'':(`tirerCadeau(${idx})`)}">
-        ${exhausted?'<div class="exhausted-stamp">ÉPUISÉ</div>':''}
-        <div class="brand-card-name">${bs.brand.name}</div>
-        <div class="brand-card-niveaux">
-          ${bs.brand.niveaux.map(n=>`<span class="badge b-blue" style="font-size:0.65rem">${NIV_LABELS[n]||n}</span>`).join('')}
-        </div>
-        <div class="brand-card-footer">
-          <div class="counter-box">
-            <span class="counter-num" style="color:${exhausted?'#334155':bs.remaining<=3?'#ef4444':'#f59e0b'}">${bs.remaining}</span>
-            <span class="counter-sep">/</span>
-            <span class="counter-max">${bs.brand.lots} cadeaux</span>
-          </div>
-          ${!exhausted?`<button class="btn btn-gold btn-sm" onclick="event.stopPropagation();tirerCadeau(${idx})">🎲 Tirer</button>`:''}
-        </div>
-      </div>
-    `;
-  }).join('');
-
-  // Historique
-  const hist = document.getElementById('history-list');
-  document.getElementById('hist-count').textContent = `${liveState.history.length} gagnant(s)`;
-  if(!liveState.history.length) {
-    hist.innerHTML='<div style="padding:20px;text-align:center;color:#334155;font-size:0.82rem">Aucun tirage pour l\'instant</div>';
-  } else {
-    hist.innerHTML = liveState.history.map((h,i)=>`
-      <div class="hist-item">
-        <span class="hist-num">${liveState.history.length - i}.</span>
+function renderHistory(){
+  const total=liveState.history.reduce((s,h)=>s+h.winners.length,0);
+  document.getElementById('hist-count').textContent=`${total} gagnant(s)`;
+  document.getElementById('hist-list').innerHTML=liveState.history.flatMap(h=>
+    h.winners.map(w=>`
+      <div class="hist-row">
+        ${h.brand.logo?`<img src="${h.brand.logo}" class="hist-brand-logo">`:`<div style="width:22px;height:22px;border-radius:4px;background:#1e293b;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0">🏷️</div>`}
         <div style="flex:1;min-width:0">
-          <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px">
-            <span class="hist-name">${h.winner.nom}</span>
-          </div>
-          <div class="hist-etab">${h.winner.etablissement||''}</div>
-          <div class="hist-brand">${h.brand}</div>
+          <div style="font-weight:600;font-size:.85rem">${w.nom}</div>
+          <div style="font-size:.72rem;color:#475569">${w.etablissement||''}</div>
+          <div style="font-size:.7rem;color:#f59e0b;font-weight:600">${h.brand.name}</div>
         </div>
-      </div>
-    `).join('');
-  }
-
-  // Fin ?
-  if(actives.length === 0) {
-    document.getElementById('tirage-fini').classList.remove('hidden');
-  }
+      </div>`)
+  ).join('');
 }
 
-function resetTirage() {
-  if(!confirm('Recommencer un nouveau tirage ? Les résultats actuels seront perdus.')) return;
-  liveState = null;
-  localStorage.setItem('tombola_live_event', JSON.stringify({ id:Date.now(), type:'reset', brandStates:[] }));
+function renderRemBrands(){
+  document.getElementById('brand-rem-grid').innerHTML=liveState.brandStates.map(bs=>{
+    const ex=bs.remaining===0;
+    const pct=bs.remaining/bs.brand.lots;
+    const col=ex?'#334155':pct<=.2?'#ef4444':pct<=.5?'#f59e0b':'#4ade80';
+    return`<div class="brand-rem-card ${ex?'exhausted':''}">
+      <div class="brand-rem-logo">${bs.brand.logo?`<img src="${bs.brand.logo}">`:'🏷️'}</div>
+      <div style="flex:1;min-width:0">
+        <div class="brand-rem-name">${bs.brand.name}</div>
+        <div class="brand-rem-count" style="color:${col}">${bs.remaining}<span style="font-size:.62rem;color:#475569;font-weight:400"> / ${bs.brand.lots}</span></div>
+      </div>
+      ${ex?'<span style="font-size:.6rem;color:#334155;font-weight:700">ÉPUISÉ</span>':''}
+    </div>`;
+  }).join('');
+}
+
+function resetTirage(){
+  if(!confirm('Recommencer un nouveau tirage ?'))return;
+  liveState=null;wheelRot=0;
+  publishFront({type:'reset',brandStates:[]});
   document.getElementById('tirage-hero').classList.remove('hidden');
   document.getElementById('tirage-live').classList.add('hidden');
-  document.getElementById('winner-flash').classList.add('hidden');
   document.getElementById('tirage-fini').classList.add('hidden');
-  refreshTirageHero();
+  refreshHero();
 }
 
-// ================================================================
-// EXPORT EXCEL
-// ================================================================
-function exportResultsExcel() {
-  if(!liveState || !liveState.history.length) { alert('Aucun gagnant tiré pour l\'instant.'); return; }
-  const wb = XLSX.utils.book_new();
-
-  // Feuille 1 : Résumé par marque
-  const summary = [['Marque','Niveaux ciblés','Cadeaux max','Distribués','Restants']];
-  liveState.brandStates.forEach(bs=>{
-    summary.push([
-      bs.brand.name,
-      bs.brand.niveaux.map(n=>NIV_LABELS[n]||n).join(', '),
-      bs.brand.lots,
-      bs.winners.length,
-      bs.remaining
-    ]);
-  });
-  const ws1 = XLSX.utils.aoa_to_sheet(summary);
-  ws1['!cols']=[{wch:30},{wch:30},{wch:14},{wch:12},{wch:10}];
-  XLSX.utils.book_append_sheet(wb, ws1, 'Résumé');
-
-  // Feuille 2 : Historique complet (ordre du tirage)
-  const hist = [['N° tirage','Marque','Nom','Établissement','Niveau']];
-  [...liveState.history].reverse().forEach((h,i)=>{
-    hist.push([i+1, h.brand, h.winner.nom, h.winner.etablissement, NIV_LABELS[h.winner.niveau]||h.winner.niveau]);
-  });
-  const ws2 = XLSX.utils.aoa_to_sheet(hist);
-  ws2['!cols']=[{wch:10},{wch:30},{wch:35},{wch:40},{wch:15}];
-  XLSX.utils.book_append_sheet(wb, ws2, 'Historique tirage');
-
-  // Feuille 3 : Gagnants par marque
-  const detail = [['Marque','N°','Nom','Établissement','Niveau']];
-  liveState.brandStates.forEach(bs=>{
-    bs.winners.forEach((w,i)=>{
-      detail.push([bs.brand.name, i+1, w.nom, w.etablissement, NIV_LABELS[w.niveau]||w.niveau]);
-    });
-    if(bs.winners.length) detail.push(['','','','','']);
-  });
-  const ws3 = XLSX.utils.aoa_to_sheet(detail);
-  ws3['!cols']=[{wch:30},{wch:5},{wch:35},{wch:40},{wch:15}];
-  XLSX.utils.book_append_sheet(wb, ws3, 'Par marque');
-
-  // Une feuille par marque
-  liveState.brandStates.forEach(bs=>{
-    if(!bs.winners.length) return;
-    const data = [['N°','Nom','Établissement','Niveau']];
-    bs.winners.forEach((w,i)=>data.push([i+1, w.nom, w.etablissement, NIV_LABELS[w.niveau]||w.niveau]));
-    const ws = XLSX.utils.aoa_to_sheet(data);
-    ws['!cols']=[{wch:5},{wch:35},{wch:40},{wch:15}];
-    const sheetName = bs.brand.name.substring(0,31).replace(/[:\\\/\?\*\[\]]/g,'');
-    XLSX.utils.book_append_sheet(wb, ws, sheetName);
-  });
-
-  XLSX.writeFile(wb, `tirage_tombola_${new Date().toISOString().slice(0,10)}.xlsx`);
+// ═══════════ EXPORT ═══════════
+function exportExcel(){
+  if(!liveState||!liveState.history.length){alert('Aucun gagnant tiré.');return;}
+  const wb=XLSX.utils.book_new();
+  const s1=[['Marque','Niveaux','Cadeaux max','Distribués','Restants']];
+  liveState.brandStates.forEach(bs=>s1.push([bs.brand.name,bs.brand.niveaux.map(n=>NIV[n]||n).join(', '),bs.brand.lots,bs.winners.length,bs.remaining]));
+  const ws1=XLSX.utils.aoa_to_sheet(s1);ws1['!cols']=[{wch:30},{wch:30},{wch:13},{wch:12},{wch:10}];XLSX.utils.book_append_sheet(wb,ws1,'Résumé');
+  const s2=[['Tour','Marque','N°','Nom','Établissement','Niveau']];
+  let t=0;[...liveState.history].reverse().forEach(h=>{t++;h.winners.forEach((w,i)=>s2.push([t,h.brand.name,i+1,w.nom,w.etablissement,NIV[w.niveau]||w.niveau]));});
+  const ws2=XLSX.utils.aoa_to_sheet(s2);ws2['!cols']=[{wch:6},{wch:28},{wch:5},{wch:34},{wch:38},{wch:14}];XLSX.utils.book_append_sheet(wb,ws2,'Historique');
+  liveState.brandStates.forEach(bs=>{if(!bs.winners.length)return;const d=[['N°','Nom','Établissement','Niveau']];bs.winners.forEach((w,i)=>d.push([i+1,w.nom,w.etablissement,NIV[w.niveau]||w.niveau]));const ws=XLSX.utils.aoa_to_sheet(d);ws['!cols']=[{wch:5},{wch:34},{wch:38},{wch:14}];XLSX.utils.book_append_sheet(wb,ws,bs.brand.name.slice(0,31).replace(/[:\\\/\?\*\[\]]/g,''));});
+  XLSX.writeFile(wb,`tirage_tombola_${new Date().toISOString().slice(0,10)}.xlsx`);
 }
 
-// ================================================================
-// UTILS
-// ================================================================
-function flashInput(id, msg) {
-  const el = document.getElementById(id);
-  el.style.borderColor='#ef4444';
-  el.placeholder=msg;
-  setTimeout(()=>{el.style.borderColor='';el.placeholder='';},2000);
-  el.focus();
-}
+// ═══════════ UTILS ═══════════
+function publishFront(d){localStorage.setItem('tombola_live_event',JSON.stringify({id:Date.now(),...d}));}
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+function flash(id,msg){const el=document.getElementById(id);el.style.borderColor='#ef4444';el.placeholder=msg;setTimeout(()=>{el.style.borderColor='';el.placeholder='';},2000);el.focus();}
 
-// ================================================================
-// INIT
-// ================================================================
+// ═══════════ INIT ═══════════
 renderBrands();
-document.getElementById('tab-badge-part').textContent = participants.length||'0';
 </script>
 </body>
 </html>

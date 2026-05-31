@@ -3,220 +3,284 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🎰 Tombola Dictée — Écran Projecteur</title>
+<title>🎰 Tombola Dictée — Projecteur</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{width:100%;height:100%;overflow:hidden}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:#050d1a;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;position:relative}
+html,body{width:100%;height:100%;overflow:hidden;background:#050d1a;color:#fff}
+body{font-family:'Segoe UI',system-ui,sans-serif;display:flex;flex-direction:column;min-height:100vh}
 
-/* FOND ANIMÉ */
-.bg-stars{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
-.star{position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--d,3s) infinite ease-in-out var(--del,0s)}
-@keyframes twinkle{0%,100%{opacity:.1;transform:scale(1)}50%{opacity:.7;transform:scale(1.4)}}
+/* FOND */
+.bg{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.star{position:absolute;border-radius:50%;background:#fff;animation:twk var(--d,3s) infinite ease-in-out var(--del,0s)}
+@keyframes twk{0%,100%{opacity:.1;transform:scale(1)}50%{opacity:.6;transform:scale(1.5)}}
 
-/* LOGO / TITRE EVENT */
-.event-header{position:fixed;top:32px;left:50%;transform:translateX(-50%);text-align:center;z-index:10}
-.event-title{font-size:1.1rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#60a5fa;opacity:.7}
+/* CONFETTIS */
+.confetti-wrap{position:fixed;inset:0;pointer-events:none;z-index:5}
+.cp{position:absolute;top:-20px;animation:fall var(--dur,3s) ease-in var(--del,0s) forwards}
+@keyframes fall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(540deg);opacity:0}}
+
+/* HEADER */
+.top-bar{position:fixed;top:0;left:0;right:0;padding:16px 48px;display:flex;align-items:center;justify-content:space-between;z-index:10;background:linear-gradient(to bottom,#050d1acc,transparent)}
+.event-name{font-size:.9rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#60a5fa;opacity:.8}
+.live-dot{width:8px;height:8px;border-radius:50%;background:#4ade80;animation:pulse 1.5s infinite;display:inline-block;margin-right:6px}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
 
 /* ÉCRAN ATTENTE */
-#screen-waiting{position:relative;z-index:10;text-align:center;padding:40px}
-.waiting-icon{font-size:6rem;margin-bottom:24px;animation:float 3s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
-.waiting-title{font-size:2.8rem;font-weight:900;color:#fff;margin-bottom:12px;letter-spacing:-1px}
-.waiting-sub{font-size:1.1rem;color:#334155;letter-spacing:1px}
+#screen-wait{position:relative;z-index:10;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px}
+.wait-icon{font-size:6rem;animation:float 3s ease-in-out infinite;margin-bottom:24px}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.wait-title{font-size:3rem;font-weight:900;margin-bottom:10px;letter-spacing:-1px}
+.wait-sub{font-size:1rem;color:#1e3a8a;letter-spacing:2px;text-transform:uppercase}
 
-/* ÉCRAN GAGNANT */
-#screen-winner{position:relative;z-index:10;text-align:center;padding:40px;display:none;width:100%;max-width:1100px}
+/* ÉCRAN SPIN (roue + gagnants) */
+#screen-spin{position:relative;z-index:10;flex:1;display:none;flex-direction:column;align-items:center;padding-top:70px;padding-bottom:80px}
+.spin-layout{display:flex;align-items:center;gap:60px;width:100%;max-width:1400px;padding:0 60px}
+@media(max-width:900px){.spin-layout{flex-direction:column;gap:30px;align-items:center}}
 
-/* Confetti */
-.confetti-wrap{position:fixed;inset:0;pointer-events:none;z-index:5}
-.confetti-piece{position:absolute;width:12px;height:12px;top:-20px;animation:fall var(--dur,3s) ease-in var(--del,0s) forwards}
-@keyframes fall{0%{transform:translateY(0) rotate(0deg) scale(1);opacity:1}100%{transform:translateY(110vh) rotate(720deg) scale(.5);opacity:0}}
+/* Roue */
+.wheel-zone{display:flex;flex-direction:column;align-items:center;gap:16px;flex-shrink:0}
+.wheel-container{position:relative;display:inline-block}
+.wheel-pointer{position:absolute;top:-4px;left:50%;transform:translateX(-50%);z-index:2;pointer-events:none}
+#front-wheel{border-radius:50%;display:block;filter:drop-shadow(0 0 30px #3b82f640)}
+.wheel-title{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#334155;text-align:center}
 
-/* Badge "félicitations" */
-.congrats-badge{display:inline-block;background:linear-gradient(135deg,#d97706,#f59e0b);color:#000;font-size:0.85rem;font-weight:900;letter-spacing:3px;text-transform:uppercase;padding:8px 28px;border-radius:40px;margin-bottom:28px;animation:popIn .4s ease}
+/* GAGNANTS */
+.winners-zone{flex:1;display:flex;flex-direction:column;gap:14px}
+.brand-announce{text-align:center;margin-bottom:8px}
+.brand-logo-big{width:70px;height:70px;border-radius:14px;object-fit:contain;background:#111827;border:2px solid #1e3a8a;margin-bottom:8px}
+.brand-name-big{font-size:1.4rem;font-weight:900;color:#f59e0b;letter-spacing:1px}
 
-/* Nom */
-.winner-name-big{font-size:5.5rem;font-weight:900;line-height:1.05;letter-spacing:-3px;color:#fff;margin-bottom:16px;animation:slideUp .5s ease;text-shadow:0 0 60px #3b82f680}
-@media(max-width:900px){.winner-name-big{font-size:3.2rem;letter-spacing:-1px}}
+.winner-card{background:linear-gradient(135deg,#0f172a,#0f2040);border:1.5px solid #1e3a8a;border-radius:16px;padding:18px 24px;display:flex;align-items:center;gap:18px;opacity:0;transform:translateX(60px);transition:all .45s ease}
+.winner-card.show{opacity:1;transform:translateX(0)}
+.winner-num{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#d97706,#f59e0b);color:#000;font-size:1.1rem;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 16px #f59e0b40}
+.winner-name{font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-.5px}
+.winner-etab{font-size:.85rem;color:#475569;margin-top:3px}
 
-/* Établissement */
-.winner-etab-big{font-size:1.6rem;color:#60a5fa;font-weight:600;margin-bottom:32px;animation:slideUp .5s ease .1s both}
-
-/* Numéro */
-.winner-counter{font-size:1rem;color:#334155;font-weight:600;letter-spacing:1px;animation:fadeIn .5s ease .3s both}
-
-/* Barre de progression marques */
-.brands-bar{position:fixed;bottom:0;left:0;right:0;background:#0b1120cc;backdrop-filter:blur(10px);border-top:1px solid #1e293b;padding:14px 40px;display:flex;gap:16px;align-items:center;overflow-x:auto;z-index:10}
-.brands-bar-label{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#334155;white-space:nowrap;margin-right:4px}
-.brand-pill{display:flex;align-items:center;gap:8px;background:#111827;border:1px solid #1e293b;border-radius:10px;padding:8px 14px;white-space:nowrap;transition:all .4s}
-.brand-pill.done{opacity:.3;text-decoration:line-through;filter:grayscale(1)}
-.brand-pill-name{font-size:0.8rem;font-weight:700}
-.brand-pill-count{font-size:0.8rem;font-weight:800;padding:2px 8px;border-radius:6px;background:#0b1120}
-.brand-pill-count.low{color:#ef4444}
-.brand-pill-count.ok{color:#f59e0b}
-.brand-pill-count.fresh{color:#4ade80}
-
-/* Animations */
-@keyframes popIn{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
-@keyframes slideUp{0%{transform:translateY(40px);opacity:0}100%{transform:translateY(0);opacity:1}}
-@keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 #f59e0b40}50%{box-shadow:0 0 0 20px #f59e0b00}}
+/* BARRE BAS */
+.brands-bar{position:fixed;bottom:0;left:0;right:0;background:#0b1120dd;backdrop-filter:blur(12px);border-top:1px solid #1e293b;padding:10px 40px;display:flex;align-items:center;gap:14px;overflow-x:auto;z-index:10}
+.brands-bar::-webkit-scrollbar{height:3px}.brands-bar::-webkit-scrollbar-thumb{background:#1e293b}
+.bb-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#334155;white-space:nowrap;margin-right:6px}
+.brand-pill{display:flex;align-items:center;gap:8px;background:#111827;border:1px solid #1e293b;border-radius:10px;padding:7px 12px;white-space:nowrap;transition:all .4s;flex-shrink:0}
+.brand-pill.done{opacity:.25;filter:grayscale(1);text-decoration:line-through}
+.bp-logo{width:24px;height:24px;border-radius:4px;object-fit:contain;background:#0b1120;flex-shrink:0}
+.bp-name{font-size:.75rem;font-weight:700}
+.bp-count{font-size:.75rem;font-weight:800;padding:2px 7px;border-radius:5px;background:#0b1120}
+.bp-count.fresh{color:#4ade80}.bp-count.ok{color:#f59e0b}.bp-count.low{color:#ef4444}
 </style>
 </head>
 <body>
 
-<!-- Étoiles fond -->
-<div class="bg-stars" id="bg-stars"></div>
+<div class="bg" id="bg"></div>
+<div class="confetti-wrap" id="confetti"></div>
 
-<!-- Confettis -->
-<div class="confetti-wrap" id="confetti-wrap"></div>
-
-<!-- Header event -->
-<div class="event-header">
-  <div class="event-title">✏️ La Dictée — Tombola</div>
+<div class="top-bar">
+  <div class="event-name">✏️ La Dictée — Tombola</div>
+  <div style="font-size:.75rem;color:#334155"><span class="live-dot"></span>LIVE</div>
 </div>
 
-<!-- ÉCRAN ATTENTE -->
-<div id="screen-waiting">
-  <div class="waiting-icon">🎰</div>
-  <div class="waiting-title">Le tirage commence bientôt…</div>
-  <div class="waiting-sub">EN ATTENTE DU PROCHAIN GAGNANT</div>
+<!-- ATTENTE -->
+<div id="screen-wait" style="display:flex">
+  <div class="wait-icon">🎰</div>
+  <div class="wait-title">Le tirage commence bientôt…</div>
+  <div class="wait-sub">En attente du prochain tirage</div>
 </div>
 
-<!-- ÉCRAN GAGNANT -->
-<div id="screen-winner">
-  <div class="congrats-badge">🎉 Félicitations !</div>
-  <div class="winner-name-big" id="fw-name">—</div>
-  <div class="winner-etab-big" id="fw-etab">—</div>
-  <div class="winner-counter" id="fw-counter"></div>
+<!-- SPIN + GAGNANTS -->
+<div id="screen-spin">
+  <div class="spin-layout">
+    <div class="wheel-zone">
+      <div class="wheel-title">La roue des marques</div>
+      <div class="wheel-container">
+        <div class="wheel-pointer">
+          <svg width="30" height="38" viewBox="0 0 30 38"><polygon points="15,3 2,36 28,36" fill="#f59e0b" filter="url(#gs)"/><defs><filter id="gs"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#f59e0b" flood-opacity=".7"/></filter></defs></svg>
+        </div>
+        <canvas id="front-wheel" width="420" height="420"></canvas>
+      </div>
+    </div>
+
+    <div class="winners-zone">
+      <div class="brand-announce" id="brand-announce" style="display:none">
+        <img id="brand-logo-big" class="brand-logo-big" src="" style="display:none">
+        <div class="brand-name-big" id="brand-name-big">—</div>
+        <div style="font-size:.75rem;color:#334155;margin-top:4px;letter-spacing:1px;text-transform:uppercase">Gagnant(e)s</div>
+      </div>
+      <div id="winners-list"></div>
+    </div>
+  </div>
 </div>
 
-<!-- Barre marques en bas -->
+<!-- BARRE MARQUES -->
 <div class="brands-bar" id="brands-bar">
-  <span class="brands-bar-label">Marques</span>
-  <span id="brands-bar-items" style="display:flex;gap:10px;flex-wrap:nowrap">—</span>
+  <span class="bb-label">Marques</span>
+  <span id="bb-items" style="display:flex;gap:8px;align-items:center;flex-wrap:nowrap"><span style="color:#334155;font-size:.78rem">En attente…</span></span>
 </div>
 
 <script>
-// ================================================
-// GÉNÉRATION DES ÉTOILES DE FOND
-// ================================================
-const starsEl = document.getElementById('bg-stars');
-for(let i=0;i<120;i++){
-  const s=document.createElement('div');
-  s.className='star';
-  const size=Math.random()*3+1;
-  s.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${2+Math.random()*4}s;--del:${Math.random()*4}s`;
-  starsEl.appendChild(s);
-}
+const COLORS=['#1e3a8a','#7c3aed','#b45309','#065f46','#9f1239','#1e40af','#6d28d9','#92400e','#134e4a','#881337','#312e81','#44403c','#164e63','#4a1942','#1c1917'];
+const CONFETTI_COLORS=['#f59e0b','#3b82f6','#ec4899','#10b981','#f97316','#8b5cf6','#fff','#fcd34d'];
 
-// ================================================
+// ÉTOILES
+const bgEl=document.getElementById('bg');
+for(let i=0;i<130;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*2.5+.8;s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${2+Math.random()*4}s;--del:${Math.random()*5}s`;bgEl.appendChild(s);}
+
 // CONFETTIS
-// ================================================
-const COLORS=['#f59e0b','#3b82f6','#ec4899','#10b981','#f97316','#8b5cf6','#fff'];
-function launchConfetti(){
-  const wrap=document.getElementById('confetti-wrap');
-  wrap.innerHTML='';
-  for(let i=0;i<80;i++){
-    const c=document.createElement('div');
-    c.className='confetti-piece';
-    const color=COLORS[Math.floor(Math.random()*COLORS.length)];
-    const isCircle=Math.random()>.5;
-    c.style.cssText=`
-      left:${Math.random()*100}%;
-      background:${color};
-      border-radius:${isCircle?'50%':'2px'};
-      width:${8+Math.random()*10}px;
-      height:${8+Math.random()*10}px;
-      --dur:${2+Math.random()*2.5}s;
-      --del:${Math.random()*1.2}s;
-    `;
-    wrap.appendChild(c);
+function confetti(){
+  const w=document.getElementById('confetti');w.innerHTML='';
+  for(let i=0;i<90;i++){const c=document.createElement('div');c.className='cp';const col=CONFETTI_COLORS[i%CONFETTI_COLORS.length];c.style.cssText=`left:${Math.random()*100}%;width:${8+Math.random()*10}px;height:${8+Math.random()*10}px;background:${col};border-radius:${Math.random()>.5?'50%':'2px'};--dur:${2+Math.random()*2.5}s;--del:${Math.random()*1}s`;w.appendChild(c);}
+  setTimeout(()=>w.innerHTML='',5000);
+}
+
+// ROUE FRONT
+let fwRot=0, fwImgs={}, fwBrandStates=[];
+
+function drawFrontWheel(active){
+  const cv=document.getElementById('front-wheel');if(!cv)return;
+  const ctx=cv.getContext('2d');const cx=cv.width/2,cy=cv.height/2,r=cx-6;
+  ctx.clearRect(0,0,cv.width,cv.height);
+  // Bordure
+  ctx.beginPath();ctx.arc(cx,cy,r+4,0,2*Math.PI);ctx.fillStyle='#1e293b';ctx.fill();
+  const n=active.length;
+  if(!n){
+    ctx.beginPath();ctx.arc(cx,cy,r,0,2*Math.PI);ctx.fillStyle='#111827';ctx.fill();
+    ctx.fillStyle='#475569';ctx.font='bold 22px Segoe UI';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🏆',cx,cy);return;
   }
-  setTimeout(()=>wrap.innerHTML='', 5000);
-}
-
-// ================================================
-// LIRE L'ÉTAT DEPUIS LE BO (localStorage)
-// ================================================
-const NIV_LABELS={
-  maternelle:'Maternelle',primaire:'Primaire',
-  college:'Collège',lycee:'Lycée',
-  superieur:'Supérieur',tous:'Tous'
-};
-
-let lastEventId = null;
-
-function readState(){
-  try{
-    const ev = JSON.parse(localStorage.getItem('tombola_live_event')||'null');
-    if(!ev) return;
-    if(ev.id === lastEventId) return; // déjà affiché
-    lastEventId = ev.id;
-
-    if(ev.type==='winner'){
-      showWinner(ev);
-    } else if(ev.type==='reset'){
-      showWaiting();
+  const seg=2*Math.PI/n;
+  active.forEach((bs,i)=>{
+    const s=fwRot+i*seg,e=s+seg,m=s+seg/2;
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,s,e);ctx.closePath();
+    ctx.fillStyle=COLORS[i%COLORS.length];ctx.fill();
+    ctx.strokeStyle='#0b1120';ctx.lineWidth=2;ctx.stroke();
+    ctx.save();
+    const tx=cx+Math.cos(m)*(r*.62),ty=cy+Math.sin(m)*(r*.62);
+    ctx.translate(tx,ty);ctx.rotate(m+Math.PI/2);
+    const img=fwImgs[bs.id];
+    const ls=n<=6?44:n<=10?33:24;
+    if(img&&img.complete&&img.naturalWidth>0){
+      ctx.drawImage(img,-ls/2,-ls/2,ls,ls);
+      if(n<=8){ctx.font=`bold ${n<=5?12:10}px Segoe UI`;ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='top';ctx.shadowColor='#000';ctx.shadowBlur=4;ctx.fillText(bs.name.slice(0,10)+(bs.name.length>10?'…':''),0,ls/2+3);ctx.shadowBlur=0;}
+    } else {
+      ctx.font=`bold ${n<=5?14:n<=8?12:10}px Segoe UI`;ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.shadowColor='#000';ctx.shadowBlur=5;ctx.fillText(bs.name.slice(0,12)+(bs.name.length>12?'…':''),0,0);ctx.shadowBlur=0;
     }
-
-    // Toujours mettre à jour la barre des marques
-    updateBrandsBar(ev.brandStates||[]);
-  } catch(e){}
-}
-
-function showWinner(ev){
-  // Basculer les écrans
-  document.getElementById('screen-waiting').style.display='none';
-  const sw=document.getElementById('screen-winner');
-  sw.style.display='block';
-
-  // Contenu
-  document.getElementById('fw-name').textContent = ev.winner.nom;
-  document.getElementById('fw-etab').textContent = ev.winner.etablissement||'';
-  document.getElementById('fw-counter').textContent =
-    `${ev.totalDone} cadeau${ev.totalDone>1?'x':''} distribué${ev.totalDone>1?'s':''} sur ${ev.totalMax}`;
-
-  // Relancer les animations CSS (force reflow)
-  sw.querySelectorAll('[class]').forEach(el=>{
-    el.style.animation='none';
-    void el.offsetWidth;
-    el.style.animation='';
+    ctx.restore();
+    const bx=cx+Math.cos(m)*(r*.87),by=cy+Math.sin(m)*(r*.87);
+    ctx.save();ctx.translate(bx,by);ctx.fillStyle='rgba(0,0,0,.6)';ctx.beginPath();ctx.arc(0,0,11,0,2*Math.PI);ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='bold 9px Segoe UI';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(bs.remaining,0,0);ctx.restore();
   });
-
-  launchConfetti();
+  ctx.beginPath();ctx.arc(cx,cy,28,0,2*Math.PI);ctx.fillStyle='#0b1120';ctx.fill();ctx.strokeStyle='#f59e0b';ctx.lineWidth=3;ctx.stroke();
+  ctx.fillStyle='#f59e0b';ctx.font='bold 14px Segoe UI';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🎲',cx,cy);
 }
 
-function showWaiting(){
-  document.getElementById('screen-winner').style.display='none';
-  document.getElementById('screen-waiting').style.display='block';
+function loadFwImages(states){
+  states.forEach(bs=>{if(bs.logo&&!fwImgs[bs.id]){const img=new Image();img.onload=()=>drawFrontWheel(states.filter(b=>b.remaining>0));img.src=bs.logo;fwImgs[bs.id]=img;}});
 }
 
-function updateBrandsBar(brandStates){
-  const container = document.getElementById('brands-bar-items');
-  if(!brandStates.length){ container.innerHTML='<span style="color:#334155;font-size:0.8rem">En attente de configuration…</span>'; return; }
-  container.innerHTML = brandStates.map(bs=>{
-    const done = bs.remaining===0;
-    const low = bs.remaining>0 && bs.remaining<=3;
-    const cls = done?'done':'';
-    const numCls = done?'':'(bs.remaining<=3?"low":"fresh")';
-    const colorClass = done?'':'(bs.remaining<=3?"low":"fresh")';
-    return `<div class="brand-pill ${done?'done':''}">
-      <span class="brand-pill-name">${bs.name}</span>
-      <span class="brand-pill-count ${done?'':bs.remaining<=3?'low':'fresh'}">${bs.remaining}</span>
+function spinFrontWheel(targetName, duration, states){
+  const active=states.filter(b=>b.remaining>0);
+  const ti=active.findIndex(b=>b.name===targetName);
+  if(ti<0){return;}
+  const n=active.length,seg=2*Math.PI/n;
+  const topAngle=-Math.PI/2-(ti*seg+seg/2);
+  const cur=((fwRot%(2*Math.PI))+2*Math.PI)%(2*Math.PI);
+  const tgt=((topAngle%(2*Math.PI))+2*Math.PI)%(2*Math.PI);
+  let diff=tgt-cur;if(diff<0)diff+=2*Math.PI;
+  const extra=(5+Math.random()*3)*2*Math.PI;
+  const finalRot=fwRot+extra+diff;
+  const startRot=fwRot,t0=performance.now();
+  const dur=duration||4800;
+  function ease(t){return 1-Math.pow(1-t,5);}
+  function anim(now){
+    const t=Math.min((now-t0)/dur,1);
+    fwRot=startRot+(finalRot-startRot)*ease(t);
+    drawFrontWheel(active);
+    if(t<1)requestAnimationFrame(anim);
+    else{fwRot=finalRot;drawFrontWheel(active);}
+  }
+  requestAnimationFrame(anim);
+}
+
+// AFFICHAGE GAGNANTS
+function showWinners(ev){
+  const ss=document.getElementById('screen-spin');
+  const sw=document.getElementById('screen-wait');
+  sw.style.display='none';
+  ss.style.display='flex';
+
+  const announce=document.getElementById('brand-announce');
+  announce.style.display='block';
+  document.getElementById('brand-name-big').textContent=ev.brandName;
+  const logoEl=document.getElementById('brand-logo-big');
+  if(ev.brandLogo){logoEl.src=ev.brandLogo;logoEl.style.display='';}
+  else logoEl.style.display='none';
+
+  const list=document.getElementById('winners-list');
+  list.innerHTML=ev.winners.map((w,i)=>`
+    <div class="winner-card" id="wc-${i}">
+      <div class="winner-num">${i+1}</div>
+      <div>
+        <div class="winner-name">${w.nom}</div>
+        <div class="winner-etab">${w.etablissement||''}</div>
+      </div>
+    </div>`).join('');
+
+  // Révéler 1 par 1 avec délai
+  ev.winners.forEach((_,i)=>{
+    setTimeout(()=>{
+      const el=document.getElementById('wc-'+i);
+      if(el)el.classList.add('show');
+      if(i===ev.winners.length-1)confetti();
+    },400+i*250);
+  });
+}
+
+// BARRE DES MARQUES
+function updateBar(states){
+  const items=document.getElementById('bb-items');
+  if(!states||!states.length){items.innerHTML='<span style="color:#334155;font-size:.78rem">En attente…</span>';return;}
+  items.innerHTML=states.map(bs=>{
+    const done=bs.remaining===0;
+    const pct=bs.remaining/bs.max;
+    const cls=done?'':'pct<=.2?\'low\':pct<=.5?\'ok\':\'fresh\'';
+    const colorCls=done?'':pct<=.2?'low':pct<=.5?'ok':'fresh';
+    return`<div class="brand-pill ${done?'done':''}">
+      ${bs.logo?`<img src="${bs.logo}" class="bp-logo">`:`<div class="bp-logo" style="display:flex;align-items:center;justify-content:center;font-size:.9rem">🏷️</div>`}
+      <span class="bp-name">${bs.name}</span>
+      <span class="bp-count ${colorCls}">${bs.remaining}</span>
     </div>`;
   }).join('');
 }
 
-// Polling toutes les 500ms (même onglet ou onglets différents)
-setInterval(readState, 500);
-readState();
+// LECTURE ÉTAT BO
+let lastId=null;
+function readState(){
+  try{
+    const ev=JSON.parse(localStorage.getItem('tombola_live_event')||'null');
+    if(!ev||ev.id===lastId)return;
+    lastId=ev.id;
+    if(ev.type==='spin_start'){
+      document.getElementById('screen-wait').style.display='none';
+      document.getElementById('screen-spin').style.display='flex';
+      document.getElementById('winners-list').innerHTML='<div style="padding:20px;color:#334155;text-align:center;font-size:.9rem">⏳ La roue tourne…</div>';
+      document.getElementById('brand-announce').style.display='none';
+      if(ev.brandStates){loadFwImages(ev.brandStates);fwBrandStates=ev.brandStates;}
+      // La roue du front tourne vers la même cible
+      if(fwBrandStates.length)spinFrontWheel(ev.brandName,ev.duration,fwBrandStates);
+    } else if(ev.type==='winners'){
+      if(ev.brandStates){loadFwImages(ev.brandStates);fwBrandStates=ev.brandStates;updateBar(ev.brandStates);}
+      setTimeout(()=>showWinners(ev), 300);
+    } else if(ev.type==='reset'){
+      fwRot=0;fwBrandStates=[];
+      document.getElementById('screen-spin').style.display='none';
+      document.getElementById('screen-wait').style.display='flex';
+      updateBar([]);
+    }
+  }catch(e){}
+}
 
-// Écoute les changements de localStorage (autre onglet)
-window.addEventListener('storage', e=>{
-  if(e.key==='tombola_live_event') readState();
-});
+setInterval(readState,500);
+window.addEventListener('storage',e=>{if(e.key==='tombola_live_event')readState();});
+readState();
+// Dessiner roue vide au démarrage
+setTimeout(()=>{if(!fwBrandStates.length)drawFrontWheel([]);},200);
 </script>
 </body>
 </html>
