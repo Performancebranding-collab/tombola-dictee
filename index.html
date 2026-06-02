@@ -8,6 +8,18 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:#0b1120;color:#e2e8f0;min-height:100vh}
+
+/* LOGIN */
+#login-screen{position:fixed;inset:0;background:#050d1a;display:flex;align-items:center;justify-content:center;z-index:9999}
+.login-box{background:#111827;border:1px solid #1e293b;border-radius:20px;padding:48px 40px;width:100%;max-width:400px;text-align:center}
+.login-icon{font-size:3rem;margin-bottom:16px}
+.login-title{font-size:1.3rem;font-weight:800;margin-bottom:4px}
+.login-sub{font-size:.82rem;color:#475569;margin-bottom:32px}
+.login-field{background:#0b1120;border:1.5px solid #1e293b;border-radius:10px;padding:12px 16px;color:#e2e8f0;font-size:1rem;width:100%;outline:none;text-align:center;letter-spacing:3px;margin-bottom:14px;transition:border-color .2s}
+.login-field:focus{border-color:#3b82f6}
+.login-btn{width:100%;padding:13px;border-radius:10px;border:none;background:#2563eb;color:#fff;font-size:1rem;font-weight:700;cursor:pointer;transition:background .2s;margin-bottom:10px}
+.login-btn:hover{background:#1d4ed8}
+.login-err{color:#f87171;font-size:.82rem;min-height:20px;margin-top:4px}
 .header{background:linear-gradient(135deg,#0f2557 0%,#1a3a8f 50%,#0f2557 100%);padding:18px 40px;display:flex;align-items:center;gap:16px;border-bottom:2px solid #1e3a8a}
 .header-icon{font-size:2rem}
 .header h1{font-size:1.4rem;font-weight:800}
@@ -100,6 +112,18 @@ tbody tr:hover td{background:#0f1a2e}
 </style>
 </head>
 <body>
+
+<!-- ÉCRAN DE CONNEXION -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-icon">🔐</div>
+    <div class="login-title">Tombola Dictée</div>
+    <div class="login-sub">Back-Office — Accès restreint</div>
+    <input class="login-field" type="password" id="login-pass" placeholder="Mot de passe" onkeydown="if(event.key==='Enter')checkLogin()">
+    <button class="login-btn" onclick="checkLogin()">Se connecter</button>
+    <div class="login-err" id="login-err"></div>
+  </div>
+</div>
 
 <div class="header">
   <div class="header-icon">🎰</div>
@@ -653,6 +677,27 @@ function exportExcel(){
 function publishFront(d){localStorage.setItem('tombola_live_event',JSON.stringify({id:Date.now(),...d}));}
 function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
 function flash(id,msg){const el=document.getElementById(id);el.style.borderColor='#ef4444';el.placeholder=msg;setTimeout(()=>{el.style.borderColor='';el.placeholder='';},2000);el.focus();}
+
+// ═══════════ LOGIN ═══════════
+const PASS = 'Dictee2026!';
+function checkLogin(){
+  const val = document.getElementById('login-pass').value;
+  if(val === PASS){
+    document.getElementById('login-screen').style.display = 'none';
+    sessionStorage.setItem('tombola_auth','1');
+  } else {
+    document.getElementById('login-err').textContent = '❌ Mot de passe incorrect';
+    document.getElementById('login-pass').value = '';
+    document.getElementById('login-pass').focus();
+    setTimeout(()=>document.getElementById('login-err').textContent='', 2500);
+  }
+}
+// Si déjà connecté dans la session
+if(sessionStorage.getItem('tombola_auth')==='1'){
+  document.getElementById('login-screen').style.display='none';
+} else {
+  setTimeout(()=>document.getElementById('login-pass').focus(), 100);
+}
 
 // ═══════════ INIT ═══════════
 renderBrands();
